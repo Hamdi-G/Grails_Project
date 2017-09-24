@@ -178,13 +178,14 @@ desired effect
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">Acueil</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li class="header">Administration</li>
-                <li><a href="/poi/index"><i class="fa fa-map-marker"></i> <span>Gestion des Pois</span></a></li>
-                <li><a href="/groupe/index"><i class="fa fa-object-group"></i> <span>Gestion des Groupes</span></a></li>
+                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+                <li><a href="/poi/index"><i class="fa fa-link"></i> <span>Liste des Pois</span></a></li>
+                <li><a href="/groupe/index"><i class="fa fa-link"></i> <span>Liste des Groupes</span></a></li>
+                <li class="header">Gestion de Platforme</li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-users"></i> <span>Gestion des utilisateurs</span>
+                    <a href="#"><i class="fa fa-link"></i> <span>Gestion des utilisateurs</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -194,11 +195,10 @@ desired effect
                         <li><a href="/userRole/index">Role</a></li>
                     </ul>
                 </li>
-                <li class="header">Platforme</li>
-                <li><a href="/user/show/1"><i class="fa fa-user"></i> <span>Profil</span></a></li>
-                <li><a href="#"><i class="fa fa-map-o"></i> <span>Découvrir</span></a></li>
+                <li><a href="/poi/index"><i class="fa fa-link"></i> <span>Gestion des Pois</span></a></li>
+                <li><a href="/groupe/index"><i class="fa fa-link"></i> <span>Gestion des Groupes</span></a></li>
                 <li class="header">À propos</li>
-                <li><a href="#"><i class="fa fa-question"></i> <span>Aide</span></a></li>
+                <li><a href="#"><i class="fa fa-link"></i> <span>Aide</span></a></li>
                 <li><a href="#"><i class="fa fa-link"></i> <span>Contactez nous</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
