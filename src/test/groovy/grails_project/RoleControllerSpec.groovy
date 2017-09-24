@@ -1,5 +1,6 @@
 package grails_project
 
+import Grails_Project.Role
 import grails.test.mixin.*
 import spock.lang.*
 
