@@ -122,9 +122,9 @@ img {
 
 .nav li {
     display: block;
-    float: left;
+    /*float: left;*/
     list-style-type: none;
-    margin-right: 0.5em;
+    /*margin-right: 0.5em;*/
     padding: 0;
 }
 
@@ -174,7 +174,7 @@ img {
 }
 
 .nav li.dropdown.open ul.dropdown-menu {
-    background-color: #4D8618;
+    /*background-color: #4D8618;*/
 }
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */

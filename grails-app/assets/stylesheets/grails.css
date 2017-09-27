@@ -59,7 +59,7 @@ a.navbar-brand {
     color: white !important;
 }
 .navbar-nav>li>a:hover {
-    background-color: #db4800 !important;
+    /*background-color: #db4800 !important;*/
     color: white !important;
 }
 .navbar-nav>li>a {

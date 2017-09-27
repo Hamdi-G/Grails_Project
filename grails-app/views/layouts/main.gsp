@@ -23,41 +23,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <asset:stylesheet src="AdminLTE.min.css"/>
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
+            page. However, you can choose any other skin. Make sure you
+            apply the skin class to the body tag so the changes take effect. -->
     <asset:stylesheet src="skins/skin-green.min.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
 
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+    BODY TAG OPTIONS:
+    =================
+    Apply one or more of the following classes to get the
+    desired effect
+    |---------------------------------------------------------|
+    | SKINS         | skin-blue                               |
+    |               | skin-black                              |
+    |               | skin-purple                             |
+    |               | skin-yellow                             |
+    |               | skin-red                                |
+    |               | skin-green                              |
+    |---------------------------------------------------------|
+    |LAYOUT OPTIONS | fixed                                   |
+    |               | layout-boxed                            |
+    |               | layout-top-nav                          |
+    |               | sidebar-collapse                        |
+    |               | sidebar-mini                            |
+    |---------------------------------------------------------|
+    -->
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 
@@ -115,7 +115,7 @@ desired effect
                             <!-- The user image in the navbar-->
                             <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">${sec.loggedInUserInfo(field: 'username')}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
@@ -123,14 +123,19 @@ desired effect
                                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    admin
-                                    <small>Member since Nov. 2012</small>
+                                    ${sec.loggedInUserInfo(field: 'username')}
+                                    <small>
+                                        <sec:ifAnyGranted roles="ROLE_ADMIN">Administrateur</sec:ifAnyGranted>
+                                        <sec:ifAnyGranted roles="ROLE_MODER">Modérateur</sec:ifAnyGranted>
+                                        <sec:ifAnyGranted roles="ROLE_USER">Utilisateur</sec:ifAnyGranted>
+                                    </small>
                                 </p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="/user/show/${sec.loggedInUserInfo(field: 'id')}"
+                                       class="btn btn-default btn-flat">Profile</a>
                                 </div>
 
                                 <div class="pull-right">
@@ -157,7 +162,7 @@ desired effect
                 </div>
 
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p>${sec.loggedInUserInfo(field: 'username')}</p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -220,13 +225,12 @@ desired effect
         <section class="content container-fluid">
 
             <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+            | Your Page Content Here |
+            -------------------------->
 
-    <main>
-        <g:layoutBody/>
-    </main>
-
+            <main>
+                <g:layoutBody/>
+            </main>
 
         </section>
         <!-- /.content -->
@@ -317,7 +321,7 @@ desired effect
     </aside>
     <!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
+      immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
@@ -332,7 +336,7 @@ desired effect
 <asset:javascript src="adminlte.min.js"/>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
+         Both of these plugins are recommended to enhance the
+         user experience. -->
 </body>
 </html>
