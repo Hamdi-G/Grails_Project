@@ -4,6 +4,10 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'poi.label', default: 'Poi')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <asset:javascript src="uploadr.manifest.js"/>
+        <asset:javascript src="uploadr.demo.manifest.js"/>
+        <asset:stylesheet href="uploadr.manifest.css"/>
+        <asset:stylesheet href="uploadr.demo.manifest.css"/>
     </head>
     <body>
         <a href="#create-poi" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

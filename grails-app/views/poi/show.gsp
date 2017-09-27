@@ -1,3 +1,5 @@
+<%@ page import="grails_project.Poi" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,6 +22,29 @@
             <div class="message" role="status">${flash.message}</div>
             </g:if>
             <f:display bean="poi" />
+            <div id="map" style="width:600px;height:400px;background:yellow"></div>
+
+            <g:javascript>
+                function myMap() {
+                    var mapOptions = {
+                        center: new google.maps.LatLng(51.0, 2.0),
+                        zoom: 6,
+                        mapTypeId: google.maps.MapTypeId.PLAN
+                    }
+                    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                    var marker = new google.maps.Marker({
+                        position:mapOptions.center,
+                        map:map
+                    });
+                    google.maps.event.addListener(map, 'click', function(e) {
+                        marker.setPosition(e.latLng);
+                    });
+                }
+
+            </g:javascript>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=myMap"></script>
+
             <g:form resource="${this.poi}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.poi}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

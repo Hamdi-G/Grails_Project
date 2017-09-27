@@ -14,6 +14,7 @@ class PoiController {
     }
 
     def show(Poi poi) {
+
         respond poi
     }
 

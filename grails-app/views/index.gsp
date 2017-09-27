@@ -3,6 +3,12 @@
 <head>
     <meta name="layout" content="main"/>
     <title>Welcome to Grails</title>
+    <style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+    </style>
 
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 </head>
