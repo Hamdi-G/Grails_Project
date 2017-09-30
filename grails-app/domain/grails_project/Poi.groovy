@@ -6,7 +6,7 @@ class Poi {
     String description;
     double lat
     double lng
-    double alt
+
 
     static belongsTo = [groupe:Groupe]
 
@@ -16,7 +16,6 @@ class Poi {
         name blank: false
         description blank: false
         lat nullable: false
-        alt nullable: false
         lng nullable: false
     }
 }

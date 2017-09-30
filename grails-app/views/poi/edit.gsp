@@ -6,14 +6,21 @@
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#edit-poi" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
+    <button class="btn btn-primary btn-round">
+        <a href="${createLink(uri: '/')}" style="color: white">
+            <i class="material-icons">home</i> Home
+        </a>
+    </button>
+    <button class="btn btn-primary btn-round">
+        <g:link class="create" action="create" ><g:message  args="[entityName]" /><i class="material-icons" style="color: white">add</i>create</g:link>
+    </a>
+    </button>
+
+    <button class="btn btn-primary btn-round">
+        <g:link class="list" action="index"><g:message  args="[entityName]" /><i class="material-icons" style="color: white">list</i> list</g:link>
+    </a>
+    </button>
+
         <div id="edit-poi" class="content scaffold-edit" role="main">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
@@ -30,6 +37,37 @@
                 <g:hiddenField name="version" value="${this.poi?.version}" />
                 <fieldset class="form">
                     <f:all bean="poi"/>
+                    <g:each var="image" in="${poi.images}">
+                        <asset:image src="${image.name}" width="300" height="300" display="inline-block" style="float:left;margin-left: 10px;margin-right: 10px;"/></a>
+                    </g:each>
+                    <div id="map" style="width:100%;height:400px;background:yellow"></div>
+                    <g:javascript>
+                function myMap() {
+
+                    var latValue = "${poi.lat}";
+                    var lngValue = "${poi.lng}";
+                    var mapOptions = {
+                        center: new google.maps.LatLng( latValue,lngValue),
+                        zoom: 6,
+                        mapTypeId: google.maps.MapTypeId.PLAN
+                    }
+                    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                    var marker = new google.maps.Marker({
+                        position:mapOptions.center,
+                        map:map
+                    });
+                    google.maps.event.addListener(map, 'click', function(e) {
+                        marker.setPosition(e.latLng);
+                        document.getElementById("lat").value = marker.getPosition().lat().toString().replace('.',',');
+                        document.getElementById("lng").value =marker.getPosition().lng().toString().replace('.',',');
+                        //document.getElementById("alt").value = marker.altitude.valueOf();
+               // .setAttribute(lat,marker.getPosition().lat())
+                    });
+                }
+
+                    </g:javascript>
+
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=myMap"></script>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
