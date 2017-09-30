@@ -1,342 +1,337 @@
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-pequiv="X-UA-Compatible" content="IE=edge">
-    <title>POI Platforme</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
-
-    <asset:stylesheet src="application.css"/>
-    <!-- Bootstrap 3.3.7 -->
-    <asset:stylesheet src="../components/bootstrap/dist/css/bootstrap.min.css"/>
-    <!-- Font Awesome -->
-    <asset:stylesheet src="../components/font-awesome/css/font-awesome.min.css"/>
-    <!-- Ionicons -->
-    <asset:stylesheet src="../components/Ionicons/css/ionicons.min.css"/>
-    <!-- Theme style -->
-    <asset:stylesheet src="AdminLTE.min.css"/>
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-            page. However, you can choose any other skin. Make sure you
-            apply the skin class to the body tag so the changes take effect. -->
-    <asset:stylesheet src="skins/skin-green.min.css"/>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <meta charset="utf-8"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>TripComapss</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="http://www.creative-tim.com/product/material-dashboard-pro"/>
+    <!--  Social tags      -->
+    <meta name="keywords"
+          content="material dashboard, bootstrap material admin, bootstrap material dashboard, material design admin, material design, creative tim, html dashboard, html css dashboard, web dashboard, freebie, free bootstrap dashboard, css3 dashboard, bootstrap admin, bootstrap dashboard, frontend, responsive bootstrap dashboard, premiu material design admin">
+    <meta name="description"
+          content="Material Dashboard PRO is a Premium Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design.">
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Material Dashboard PRO by Creative Tim | Premium Bootstrap Admin Template">
+    <meta itemprop="description"
+          content="Material Dashboard PRO is a Premium Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design.">
+    <meta itemprop="image" content="http://s3.amazonaws.com/creativetim_bucket/products/51/opt_mdp_thumbnail.jpg">
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@creativetim">
+    <meta name="twitter:title" content="Material Dashboard PRO by Creative Tim | Premium Bootstrap Admin Template">
+    <meta name="twitter:description"
+          content="Material Dashboard PRO is a Premium Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design.">
+    <meta name="twitter:creator" content="@creativetim">
+    <meta name="twitter:image" content="http://s3.amazonaws.com/creativetim_bucket/products/51/opt_mdp_thumbnail.jpg">
+    <!-- Open Graph data -->
+    <meta property="fb:app_id" content="655968634437471">
+    <meta property="og:title" content="Material Dashboard PRO by Creative Tim | Premium Bootstrap Admin Template"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://www.creative-tim.com/product/material-dashboard-pro"/>
+    <meta property="og:image" content="http://s3.amazonaws.com/creativetim_bucket/products/51/opt_mdp_thumbnail.jpg"/>
+    <meta property="og:description"
+          content="Material Dashboard PRO is a Premium Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design."/>
+    <meta property="og:site_name" content="Creative Tim"/>
+    <!-- Bootstrap core CSS     -->
+    <asset:stylesheet src="bootstrap.min.css"/>
+    <!--  Material Dashboard CSS    -->
+    <asset:stylesheet src="material-dashboard.css"/>
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <asset:stylesheet src="demo.css"/>
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<!--
-    BODY TAG OPTIONS:
-    =================
-    Apply one or more of the following classes to get the
-    desired effect
-    |---------------------------------------------------------|
-    | SKINS         | skin-blue                               |
-    |               | skin-black                              |
-    |               | skin-purple                             |
-    |               | skin-yellow                             |
-    |               | skin-red                                |
-    |               | skin-green                              |
-    |---------------------------------------------------------|
-    |LAYOUT OPTIONS | fixed                                   |
-    |               | layout-boxed                            |
-    |               | layout-top-nav                          |
-    |               | sidebar-collapse                        |
-    |               | sidebar-mini                            |
-    |---------------------------------------------------------|
-    -->
-<body class="hold-transition skin-green sidebar-mini">
+
+<body>
 <div class="wrapper">
-
-    <!-- Main Header -->
-    <header class="main-header">
-
-        <!-- Logo -->
-        <a href="/index" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>POI</b></span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>POI</b>Platforme</span>
-        </a>
-
-        <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
+    <div class="sidebar" data-active-color="purple" data-background-color="black"
+         data-image="">
+        <!--
+        Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
+        Tip 2: you can also add an image using data-image tag
+        Tip 3: you can change the color of the sidebar with data-background-color="white | black"
+    -->
+        <div class="logo">
+            <a  class="simple-text logo-mini">
             </a>
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
+            <a class="simple-text logo-normal">
+                <i class="material-icons">explore</i>
+                TripCompass
+            </a>
+        </div>
 
-                    <!-- /.messages-menu -->
-
-                    <!-- Notifications Menu -->
-                    <li class="dropdown notifications-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <!-- Inner Menu: contains the notifications -->
-                                <ul class="menu">
-                                    <li><!-- start notification -->
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
-                                    <!-- end notification -->
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>
-                    <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">${sec.loggedInUserInfo(field: 'username')}</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                                <p>
-                                    ${sec.loggedInUserInfo(field: 'username')}
-                                    <small>
-                                        <sec:ifAnyGranted roles="ROLE_ADMIN">Administrateur</sec:ifAnyGranted>
-                                        <sec:ifAnyGranted roles="ROLE_MODER">Modérateur</sec:ifAnyGranted>
-                                        <sec:ifAnyGranted roles="ROLE_USER">Utilisateur</sec:ifAnyGranted>
-                                    </small>
-                                </p>
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="/user/show/${sec.loggedInUserInfo(field: 'id')}"
-                                       class="btn btn-default btn-flat">Profile</a>
-                                </div>
-
-                                <div class="pull-right">
-                                    <a href="${createLink(action: 'index', controller: 'logout')}"
-                                       class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        <div class="sidebar-wrapper">
+            <div class="user">
+                <div class="photo">
+                    <img src="../assets/img/faces/avatar.jpg"/>
                 </div>
 
-                <div class="pull-left info">
-                    <p>${sec.loggedInUserInfo(field: 'username')}</p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
-
-            <!-- search form (Optional) -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
-                                class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-
-            <!-- Sidebar Menu -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li class="header">Administration</li>
-                <li><a href="/poi/index"><i class="fa fa-map-marker"></i> <span>Gestion des Pois</span></a></li>
-                <li><a href="/groupe/index"><i class="fa fa-object-group"></i> <span>Gestion des Groupes</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-users"></i> <span>Gestion des utilisateurs</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
+                <div class="info">
+                    <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+                        <span>
+                            ${sec.loggedInUserInfo(field: 'username')}
+                            <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="/user/index">Utilisateurs</a></li>
-                        <li><a href="/userRole/index">Role</a></li>
-                    </ul>
+
+                    <div class="clearfix"></div>
+
+                    <div class="collapse" id="collapseExample">
+                        <ul class="nav">
+                            <li>
+                                <a>
+                                <span class="label label-info">
+                                    <sec:ifAnyGranted roles="ROLE_ADMIN">Administrateur</sec:ifAnyGranted>
+                                    <sec:ifAnyGranted roles="ROLE_MODER">Modérateur</sec:ifAnyGranted>
+                                    <sec:ifAnyGranted roles="ROLE_USER">Utilisateur</sec:ifAnyGranted>
+                                </span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="/user/show/${sec.loggedInUserInfo(field: 'id')}">
+                                    <span class="sidebar-normal">Mon profil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/user/edit/${sec.loggedInUserInfo(field: 'id')}">
+                                    <span class="sidebar-normal">Modifier mon profil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="${createLink(action: 'index', controller: 'logout')}">
+                                    <span class="sidebar-normal">Se déconnecter</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav">
+                <li>
+                    <a href="/">
+                        <i class="material-icons">dashboard</i>
+
+                        <p>Accueil</p>
+                    </a>
                 </li>
-                <li class="header">Platforme</li>
-                <li><a href="/user/show/1"><i class="fa fa-user"></i> <span>Profil</span></a></li>
-                <li><a href="#"><i class="fa fa-map-o"></i> <span>Découvrir</span></a></li>
-                <li class="header">À propos</li>
-                <li><a href="#"><i class="fa fa-question"></i> <span>Aide</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>Contactez nous</span></a></li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons">place</i>
+
+                        <p>Tous les lieux
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#componentsExamples">
+                        <i class="material-icons">apps</i>
+
+                        <p>Catégories
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+
+                    <div class="collapse" id="componentsExamples">
+                        <ul class="nav" id="categories">
+                            <g:each var="cat" in="${grails_project.Groupe.all}">
+                                <li>
+                                    <a href="/poi/bygroup?id=${cat.id}">
+                                        <span class="sidebar-normal">${cat.getName()}</span>
+                                    </a>
+                                </li>
+                            </g:each>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#formsExamples">
+                        <i class="material-icons">settings</i>
+
+                        <p>Gestion de site
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+
+                    <div class="collapse" id="formsExamples">
+                        <ul class="nav">
+                            <li>
+                                <a href="/user/">
+                                    <span class="sidebar-normal">Utilisateurs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/poi/">
+                                    <span class="sidebar-normal">Lieux</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/groupe/">
+                                    <span class="sidebar-normal">Catégories</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons">info</i>
+
+                        <p>À propos</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons">textsms</i>
+
+                        <p>Contactez-nous</p>
+                    </a>
+                </li>
             </ul>
-            <!-- /.sidebar-menu -->
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+        </div>
+    </div>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Page Header
-                <small>Optional description</small>
-            </h1>
-        </section>
+    <div class="main-panel">
+        <nav class="navbar navbar-transparent navbar-absolute">
+            <div class="container-fluid">
+                <div class="navbar-minimize">
+                    <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                        <i class="material-icons visible-on-sidebar-regular">more_vert</i>
+                        <i class="material-icons visible-on-sidebar-mini">view_list</i>
+                    </button>
+                </div>
 
-        <!-- Main content -->
-        <section class="content container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                </div>
 
-            <!--------------------------
-            | Your Page Content Here |
-            -------------------------->
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="material-icons">notifications</i>
+                                <span class="notification">5</span>
 
+                                <p class="hidden-lg hidden-md">
+                                    Notifications
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Mike John responded to your email</a>
+                                </li>
+                                <li>
+                                    <a href="#">You have 5 new tasks</a>
+                                </li>
+                                <li>
+                                    <a href="#">You're now friend with Andrew</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another Notification</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another One</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="separator hidden-lg hidden-md"></li>
+                    </ul>
+
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group form-search is-empty">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <span class="material-input"></span>
+                        </div>
+                        <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                            <i class="material-icons">search</i>
+
+                            <div class="ripple-container"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
             <main>
                 <g:layoutBody/>
             </main>
-
-        </section>
-        <!-- /.content -->
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <p class="copyright pull-right">
+                    &copy;
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>
+                    <a href="#">Hamdi & Imed</a>, made with love for a better web
+                </p>
+            </div>
+        </footer>
     </div>
-    <!-- /.content-wrapper -->
-
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-            Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Create the tabs -->
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <!-- Home tab content -->
-            <div class="tab-pane active" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:;">
-                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                                <p>Will be 23 on April 24th</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:;">
-                            <h4 class="control-sidebar-subheading">
-                                Custom Template Design
-                                <span class="pull-right-container">
-                                    <span class="label label-danger pull-right">70%</span>
-                                </span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-            </div>
-            <!-- /.tab-pane -->
-            <!-- Stats tab content -->
-            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-            <!-- /.tab-pane -->
-            <!-- Settings tab content -->
-            <div class="tab-pane" id="control-sidebar-settings-tab">
-                <form method="post">
-                    <h3 class="control-sidebar-heading">General Settings</h3>
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Report panel usage
-                            <input type="checkbox" class="pull-right" checked>
-                        </label>
-
-                        <p>
-                            Some information about this general settings option
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-                </form>
-            </div>
-            <!-- /.tab-pane -->
-        </div>
-    </aside>
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
-      immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<asset:javascript src="../components/jquery/dist/jquery.min.js"/>
-<!-- Bootstrap 3.3.7 -->
-<asset:javascript src="../components/bootstrap/dist/js/bootstrap.min.js"/>
-<!-- AdminLTE App -->
-<asset:javascript src="adminlte.min.js"/>
-
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-         Both of these plugins are recommended to enhance the
-         user experience. -->
 </body>
+<!--   Core JS Files   -->
+<asset:javascript src="jquery-3.2.1.min.js"/>
+<asset:javascript src="bootstrap.min.js"/>
+<asset:javascript src="material.min.js"/>
+<asset:javascript src="perfect-scrollbar.jquery.min.js"/>
+<!-- Library for adding dinamically elements -->
+<asset:javascript src="arrive.min.js"/>
+<!-- Forms Validations Plugin -->
+<asset:javascript src="jquery.validate.min.js"/>
+<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+<asset:javascript src="moment.min.js"/>
+<!--  Charts Plugin, full documentation here: https://gionkunz.github.io/chartist-js/ -->
+<asset:javascript src="chartist.min.js"/>
+<!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+<asset:javascript src="jquery.bootstrap-wizard.js"/>
+<!--  Notifications Plugin, full documentation here: http://bootstrap-notify.remabledesigns.com/    -->
+<asset:javascript src="bootstrap-notify.js"/>
+<!--   Sharrre Library    -->
+<asset:javascript src="jquery.sharrre.js"/>
+<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+<asset:javascript src="bootstrap-datetimepicker.js"/>
+<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+<asset:javascript src="jquery-jvectormap.js"/>
+<!-- Sliders Plugin, full documentation here: https://refreshless.com/nouislider/ -->
+<asset:javascript src="nouislider.min.js"/>
+<!--  Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+<asset:javascript src="jquery.select-bootstrap.js"/>
+<!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
+<asset:javascript src="jquery.datatables.js"/>
+<!-- Sweet Alert 2 plugin, full documentation here: https://limonte.github.io/sweetalert2/ -->
+<asset:javascript src="sweetalert2.js"/>
+<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<asset:javascript src="jasny-bootstrap.min.js"/>
+<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+<asset:javascript src="fullcalendar.min.js"/>
+<!-- Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+<asset:javascript src="jquery.tagsinput.js"/>
+<!-- Material Dashboard javascript methods -->
+<asset:javascript src="material-dashboard.js"/>
+<!-- Material Dashboard DEMO methods, don't include it in your project! -->
+<asset:javascript src="demo.js"/>
+<script>
+    $(document).ready(function () {
+        $('#usersdatatables').DataTable();
+    });
+</script>
+
 </html>

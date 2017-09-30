@@ -23,7 +23,9 @@ class LogoutController {
         }*/
 
         session.invalidate()
-        redirectStrategy.sendRedirect request, response, SpringSecurityUtils.securityConfig.logout.filterProcessesUrl // '/logoff'
+        redirect(uri: "/login/auth")
+        //redirectStrategy.sendRedirect request, response, SpringSecurityUtils.securityConfig.logout.filterProcessesUrl()
         response.flushBuffer()
+
     }
 }

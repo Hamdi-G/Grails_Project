@@ -4,49 +4,71 @@
 <head>
     <meta name="layout" content="main"/>
     <title>Welcome to Grails</title>
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+    <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 </head>
+
 <body>
-<div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-aqua">
-        <div class="inner">
-            <h3>${grails_project.Poi.count()}</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="rose">
+                    <i class="material-icons">place</i>
+                </div>
 
-            <p>Point d'interet</p>
-        </div>
-        <div class="icon">
-            <i class="ion ion-pin"></i>
-        </div>
-        <a href="/poi/index" class="small-box-footer">Découvrir<i class="fa fa-arrow-circle-right"></i></a>
-    </div>
-</div>
-<div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-orange">
-        <div class="inner">
-            <h3>${grails_project.Groupe.count}</h3>
+                <div class="card-content">
+                    <p class="category">Lieux</p>
 
-            <p>Groups</p>
-        </div>
-        <div class="icon">
-            <i class="ion ion-android-apps"></i>
-        </div>
-        <a href="/groupe/index" class="small-box-footer">Découvrir<i class="fa fa-arrow-circle-right"></i></a>
-    </div>
-</div>
-<div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-red">
-        <div class="inner">
-            <h3>${Grails_Project.User.count}</h3>
+                    <h3 class="card-title">${grails_project.Poi.count}</h3>
+                </div>
 
-            <p>Utilisateurs</p>
+                <div class="card-footer">
+                    <div class="stats">
+                        <a href="#">Voir tous</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="icon">
-            <i class="ion ion-person"></i>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <i class="material-icons">view_carousel</i>
+                </div>
+
+                <div class="card-content">
+                    <p class="category">Catégories</p>
+
+                    <h3 class="card-title">${grails_project.Groupe.count}</h3>
+                </div>
+
+                <div class="card-footer">
+                    <div class="stats">
+                        <a href="/poi/bygroup">Voir tous</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <a href="/user/index" class="small-box-footer">Voir tout<i class="fa fa-arrow-circle-right"></i></a>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="material-icons">person</i>
+                </div>
+
+                <div class="card-content">
+                    <p class="category">Utilisateurs</p>
+
+                    <h3 class="card-title">${Grails_Project.User.count}</h3>
+                </div>
+
+                <div class="card-footer">
+                    <div class="stats">
+                        <a href="#">Voir tous</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

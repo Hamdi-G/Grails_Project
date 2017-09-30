@@ -1,28 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-user" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${userList}" />
+<head>
+    <meta name="layout" content="main"/>
+    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}"/>
+    <title><g:message code="default.list.label" args="[entityName]"/></title>
+</head>
 
-            <div class="pagination">
-                <g:paginate total="${userCount ?: 0}" />
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-icon" data-background-color="purple">
+                    <i class="material-icons">person</i>
+                </div>
+
+                <div class="card-content">
+                    <h4 class="card-title">Utilisateurs</h4>
+
+                    <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        <g:link class="create" action="create">
+                            <button id="addnew" class="btn btn-primary btn-round btn-fab btn-fab-mini"
+                                    style="float: right;"><i class="material-icons">person_add</i></button>
+                        </g:link>
+                    </div>
+
+                    <div class="material-datatables">
+                        <table id="usersdatatables"
+                               class="table table-striped table-no-bordered table-hover dataTable dtr-inline"
+                               cellspacing="0" width="100%" style="width: 100%;" role="grid"
+                               aria-describedby="datatables_info">
+                            <thead>
+                            <tr>
+                                <th>Nom d'utilisateur</th>
+                                <th class='hidden-350'>expiré</th>
+                                <th class='hidden-1024'>verrouillé</th>
+                                <th class='hidden-480'>Activé</th>
+                                <th class='hidden-480'>mot de passe expiré</th>
+                                <th class="td-actions text-right disabled-sorting">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <g:each in="${userList}" var="user">
+                                <tr>
+                                    <td><a href="/user/show/${user.id}">${fieldValue(bean: user, field: "username")}</a>
+                                    </td>
+                                    <td class='hidden-350'><g:formatBoolean boolean="${user.accountExpired}"/></td>
+                                    <td class='hidden-1024'><g:formatBoolean boolean="${user.accountLocked}"/></td>
+                                    <td class='hidden-480'><g:formatBoolean boolean="${user.enabled}"/></td>
+                                    <td class='hidden-480'><g:formatBoolean boolean="${user.passwordExpired}"/></td>
+                                    <td class="td-actions text-right">
+                                        <a href="/user/show/${user.id}"
+                                           class='btn btn-simple btn-info'><i
+                                                class='material-icons'>person</i></a>
+                                        <a href="/user/edit/${user.id}"
+                                           class='btn btn-simple btn-success'><i
+                                                class='material-icons'>create</i></a>
+                                        <a href="/user/delete/${user.id}"
+                                           class='btn btn-simple btn-danger'><i
+                                                class='material-icons'>delete</i></a></td>
+                                </tr>
+                            </g:each>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+
+</body>
 </html>
