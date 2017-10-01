@@ -42,6 +42,9 @@ class PoiController {
             return
         }
 
+        poi = new Poi(params)
+        def image = new Image(params)
+        poi.addToImages(image)
         poi.save flush:true
 
         request.withFormat {

@@ -1,3 +1,4 @@
+<%@ page import="grails_project.Image" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,17 @@
 </head>
 
 <body>
+<button class="btn btn-primary btn-round">
+    <a href="${createLink(uri: '/')}" style="color: white">
+        <i class="material-icons">home</i> Home
+    </a>
+</button>
 
+<button class="btn btn-primary btn-round">
+    <g:link class="list" action="index"><g:message args="[entityName]"/><i class="material-icons"
+                                                                           style="color: white">list</i> list</g:link>
+</a>
+</button>
 <div id="create-poi" class="content scaffold-create" role="main">
     <div class="container-fluid">
         <div class="row">
@@ -107,6 +118,22 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                <div class="fileinput-new thumbnail">
+                                                    <img src="../../assets/img/image_placeholder.jpg" alt="...">
+                                                </div>
+                                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                <div>
+                                                    <span class="btn btn-rose btn-round btn-file">
+                                                        <span class="fileinput-new">Select image</span>
+                                                        <span class="fileinput-exists">Change</span>
+                                                        <input type="file" name="${Image.name}">
+                                                    </span>
+                                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -140,17 +167,7 @@
 
 
 
-<button class="btn btn-primary btn-round">
-    <a href="${createLink(uri: '/')}" style="color: white">
-        <i class="material-icons">home</i> Home
-    </a>
-</button>
 
-<button class="btn btn-primary btn-round">
-    <g:link class="list" action="index"><g:message args="[entityName]"/><i class="material-icons"
-                                                                           style="color: white">list</i> list</g:link>
-</a>
-</button>
 
 <div id="create-po" class="content scaffold-create" role="main">
     <h1><g:message code="default.create.label" args="[entityName]"/></h1>

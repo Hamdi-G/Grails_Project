@@ -29,12 +29,25 @@ class BootStrap {
         def image_P5 = new Image(name: 'image_P5.png').save(flush:true)
 
         def group_1 = new Groupe(name: 'group1', description: 'descGroup1')
-        def group_2 = new Groupe(name: 'group2', description: 'descGroup2').save(flush:true)
-
-        def poi_1 = new Poi(name: 'poiName1', description: 'poiDesc1', lat: 43.729497, lng:7.146764).addToGroups(group_1).save(flush:true)
-        def poi_2 = new Poi(name: 'poiName2', description: 'poiDesc2', lat: 43.72949, lng:7.14676).addToGroups(group_1).save(flush:true)
+        def group_2 = new Groupe(name: 'group2', description: 'descGroup2')
+        def group_3 = new Groupe(name: 'group3', description: 'descGroup3')
 
 
+        def poi_1 = new Poi(name: 'poiName1', description: 'poiDesc1', lat: 43.729497, lng:7.146764).addToGroups(group_1)
+        poi_1.addToImages(image_P1).save(flush:true)
+        def poi_2 = new Poi(name: 'poiName2', description: 'poiDesc2', lat: 40.72949, lng:8.14676).addToGroups(group_1)
+        poi_2.addToImages(image_P2).save(flush:true)
+
+        def poi_3 = new Poi(name: 'poiName3', description: 'poiDesc3', lat: 46.729497, lng:9.146764).addToGroups(group_2)
+        poi_3.addToImages(image_P3).save(flush:true)
+        def poi_4 = new Poi(name: 'poiName4', description: 'poiDesc4', lat: 50.72949, lng:10.14676).addToGroups(group_2)
+        poi_4.addToImages(image_P4).save(flush:true)
+        def poi_5 = new Poi(name: 'poiName5', description: 'poiDesc5', lat: 53.729497, lng:12.146764).addToGroups(group_3)
+        poi_5.addToImages(image_P5).save(flush:true).save(flush:true)
+
+        group_1.addToImages(image1_G1).save(flush:true)
+        group_2.addToImages(image1_G2).save(flush:true)
+        group_3.addToImages(image1_G3).save(flush:true)
     }
     def destroy = {
     }

@@ -40,7 +40,8 @@ class GroupeController {
             respond groupe.errors, view:'create'
             return
         }
-
+        groupe = new Groupe(params)
+        groupe.addToImages( new Image(params))
         groupe.save flush:true
 
         request.withFormat {
