@@ -40,13 +40,13 @@
                                     <g:if test="${i == 0}">
                                         <div class="item active">
                                             <asset:image class="img img-responsive center-block" style=" height: 400px"
-                                                         src="${img.path}"/>
+                                                         src="${img.name}"/>
                                         </div>
                                     </g:if>
                                     <g:else>
                                         <div class="item">
                                             <asset:image class="img img-responsive center-block" style=" height: 400px"
-                                                         src="${img.path}"/>
+                                                         src="${img.name}"/>
                                         </div>
                                     </g:else>
                                 </g:if>
@@ -89,7 +89,7 @@
                             <div class="card-image" data-header-animation="true">
                                 <a href="#pablo">
                                     <g:if test="${p.images.size() != 0}">
-                                        <asset:image class="img" src="${p.images[0].path}"/>
+                                        <asset:image class="img" src="${p.images[0].name}"/>
                                     </g:if>
                                     <g:else>
                                         <asset:image class="img" src="non_disponible.jpg"/>

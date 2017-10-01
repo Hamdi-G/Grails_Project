@@ -339,17 +339,6 @@ $('#groupsdatatables').DataTable();
 
 
 
-var dataPreferences = {
-    labels: ['62%', '32%', '6%'],
-    series: [62, 32, 77]
-};
-
-var optionsPreferences = {
-    height: '230px'
-};
-
-Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-
 function initMap() {
     var pois
     $.ajax({
@@ -458,10 +447,12 @@ function initMap() {
                 alert('Error: Your browser doesn\'t support geolocation.');
             }
 
+        }
+    });
 
-
-            /*var pg = []
-            var groups
+    var groups
+    var ss =[]
+    var total = 0
             $.ajax({
                     url: "${g.createLink(controller: 'grails_project.Groupe', action: 'listgroup')}",
                     dataType: "json",
@@ -473,14 +464,37 @@ function initMap() {
                     },
                     complete: function() {
 
-                        //TODO PIE CHARTS
+
+
+                        for (var i=0; i < groups.length ; i++){
+                            ss.push(parseInt(groups[i].pois.length.toString()))
+                            total += parseInt(groups[i].pois.length.toString())
+
+
+
+                        }
+                        //alert(JSON.stringify(total))
+                        var percent = []
+                        for (var i=0; i < ss.length ; i++){
+                            percent.push(((ss[i] * 100 )/ total).toString()+'% '+groups[i].name.toString() )
+
+                        }
+                        //alert(JSON.stringify(percent))
+
+                        var dataPreferences = {
+                            labels: percent,
+                            series: ss
+                        };
+
+                        var optionsPreferences = {
+                            height: '280px'
+                        };
+
+                        Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
                     }
 
-             });*/
+             });
 
-
-        }
-    });
 
 
 
