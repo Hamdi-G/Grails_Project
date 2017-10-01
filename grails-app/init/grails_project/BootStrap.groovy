@@ -32,13 +32,13 @@ class BootStrap {
         group_1.addToImages(image1_G1).save(flush:true)
         group_1.addToImages(image2_G1).save(flush:true)
         group_1.save(flush:true)
-        def poi_1 = new Poi(name: 'poiName1', description: 'poiDesc1', lat: 2.0, lng:3.0 ,groupe: group_1).save()
+        def poi_1 = new Poi(name: 'poiName1', description: 'poiDesc1', lat: 43.729497, lng:7.146764 ,groupe: group_1).save()
         poi_1.addToImages(image_P1).save()
         def poiG_1 = new PoiGroup(poi: poi_1, groupe: group_1).save(flush:true)
 
         def group_2 = new Groupe(name: 'group2', description: 'descGroup2').save(flush:true)
         group_2.addToImages(image1_G2).save()
-        def poi_2 = new Poi(name: 'poiName2', description: 'poiDesc2', lat: 2.1, lng:3.1, groupe: group_2).save()
+        def poi_2 = new Poi(name: 'poiName2', description: 'poiDesc2', lat: 43.689283, lng:7.241745, groupe: group_2).save()
         poi_2.addToImages(image_P2).save()
         def poiG_2 = new PoiGroup(poi: poi_2, groupe: group_2).save(flush:true)
 

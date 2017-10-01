@@ -1,5 +1,7 @@
 package grails_project
 
+import grails.converters.JSON
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -11,6 +13,10 @@ class PoiController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Poi.list(params), model:[poiCount: Poi.count()]
+    }
+
+    def listpoi(){
+        render Poi.list() as JSON
     }
 
     def show(Poi poi) {
