@@ -14,10 +14,10 @@ class GroupeController {
         params.max = Math.min(max ?: 10, 100)
         respond Groupe.list(params), model:[groupeCount: Groupe.count()]
     }
+
     def listgroup(){
         render Groupe.list() as JSON
     }
-
 
     def show(Groupe groupe) {
         respond groupe

@@ -15,10 +15,23 @@
                     <form action="/user/save" method="post" id="TypeValidation" class="form-horizontal"
                           novalidate="novalidate">
                         <div class="card-header card-header-text" data-background-color="rose">
-                            <h4 class="card-title">Ajout d'utilisateur</h4>
+                            <h4 class="card-title">Création d'un utilisateur</h4>
                         </div>
 
                         <div class="card-content">
+
+                            <g:if test="${flash.message}">
+                                <div class="message" role="status">${flash.message}</div>
+                            </g:if>
+                            <g:hasErrors bean="${this.user}">
+                                <ul class="errors" role="alert">
+                                    <g:eachError bean="${this.user}" var="error">
+                                        <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
+                                                error="${error}"/></li>
+                                    </g:eachError>
+                                </ul>
+                            </g:hasErrors>
+
                             <fieldset class="form">
 
                                 <div class="row">

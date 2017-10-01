@@ -154,6 +154,7 @@
                         </ul>
                     </div>
                 </li>
+                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MODERATOR">
                 <li>
                     <a data-toggle="collapse" href="#formsExamples">
                         <i class="material-icons">settings</i>
@@ -183,6 +184,7 @@
                         </ul>
                     </div>
                 </li>
+                </sec:ifAnyGranted>
                 <li>
                     <a href="#">
                         <i class="material-icons">info</i>
@@ -331,6 +333,9 @@
 <asset:javascript src="demo.js"/>
 <g:javascript>
 $('#usersdatatables').DataTable();
+$('#poisdatatables').DataTable();
+$('#groupsdatatables').DataTable();
+
 
 
 

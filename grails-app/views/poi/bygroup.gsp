@@ -108,18 +108,20 @@
                                                 title="" data-original-title="View">
                                             <i class="material-icons">art_track</i>
                                         </button></a>
-                                    <a href="/poi/edit/${p.id}">
-                                        <button type="button" class="btn btn-success btn-simple" rel="tooltip"
-                                                data-placement="bottom"
-                                                title="" data-original-title="Edit">
-                                            <i class="material-icons">edit</i>
-                                        </button></a>
-                                    <a href="/poi/delete/${p.id}">
-                                        <button type="button" class="btn btn-danger btn-simple" rel="tooltip"
-                                                data-placement="bottom"
-                                                title="" data-original-title="Remove">
-                                            <i class="material-icons">close</i>
-                                        </button></a>
+                                    <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MODERATOR">
+                                        <a href="/poi/edit/${p.id}">
+                                            <button type="button" class="btn btn-success btn-simple" rel="tooltip"
+                                                    data-placement="bottom"
+                                                    title="" data-original-title="Edit">
+                                                <i class="material-icons">edit</i>
+                                            </button></a>
+                                        <a href="/poi/delete/${p.id}">
+                                            <button type="button" class="btn btn-danger btn-simple" rel="tooltip"
+                                                    data-placement="bottom"
+                                                    title="" data-original-title="Remove">
+                                                <i class="material-icons">close</i>
+                                            </button></a>
+                                    </sec:ifAnyGranted>
                                 </div>
                                 <h4 class="card-title">
                                     <a href="#pablo">${p.name}</a>
