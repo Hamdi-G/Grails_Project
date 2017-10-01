@@ -2,9 +2,9 @@ package grails_project
 
 class Image {
 
-    String name;
+    String path;
 
     static constraints = {
-        name blank: false
+        path blank: false
     }
 }

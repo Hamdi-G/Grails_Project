@@ -330,107 +330,156 @@
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <asset:javascript src="demo.js"/>
 <g:javascript>
-    $('#usersdatatables').DataTable();
-
-    function initMap() {
-        var pois
-        $.ajax({
-            url:"${g.createLink(controller: 'poi', action: 'listpoi')}",
-            dataType: "json",
-            success: function(data) {
-                pois = data
-            },
-            error: function(request, status, error) {
-
-            },
-            complete: function() {
-                var map = new google.maps.Map(document.getElementById('map1'), {
-            center: {lat: 43.729497, lng: 7.146764},
-            zoom: 10,
-        });
-           //ajout du marquer/adresse pour chaque poi
-         var addresss =[]
-         for (var i = 0; i < pois.length; i++){
+$('#usersdatatables').DataTable();
 
 
-             var latlng = {lat: pois[i].lat, lng: pois[i].lng};
 
-             /*//marquer
-             var marker = new google.maps.Marker({
-                position: latlng,
-                map: map
-              });*/
-             //legende
-            var info = new google.maps.InfoWindow({map: map});
-            info.setContent(pois[i].name);
-            info.setPosition(latlng);
+var dataPreferences = {
+    labels: ['62%', '32%', '6%'],
+    series: [62, 32, 77]
+};
 
-            //adresse de poi depuis lng & lat
-            var geocoder = new google.maps.Geocoder;
-            var latlng = {lat: pois[i].lat, lng: pois[i].lng};
-            geocoder.geocode({'location': latlng}, function (results, status) {
-                if (status === 'OK') {
-                    if (results[1]) {
-                        addresss.push(results[1].formatted_address);
-                    // Check if all calls have been processed
-                    if (addresss.length == pois.length) {
-                        someOtherFunction(addresss);
-                    }
+var optionsPreferences = {
+    height: '230px'
+};
+
+Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+
+function initMap() {
+    var pois
+    $.ajax({
+        url: "${g.createLink(controller: 'poi', action: 'listpoi')}",
+        dataType: "json",
+        success: function(data) {
+            pois = data
+        },
+        error: function(request, status, error) {
+
+        },
+        complete: function() {
+            var map = new google.maps.Map(document.getElementById('map1'), {
+                center: {
+                    lat: 43.729497,
+                    lng: 7.146764
+                },
+                zoom: 10,
+            });
+            //ajout du marquer/adresse pour chaque poi
+            var addresss = []
+            for (var i = 0; i < pois.length; i++) {
+
+
+                var latlng = {
+                    lat: pois[i].lat,
+                    lng: pois[i].lng
+                };
+
+                /*//marquer
+                var marker = new google.maps.Marker({
+                   position: latlng,
+                   map: map
+                 });*/
+                //legende
+                var info = new google.maps.InfoWindow({
+                    map: map
+                });
+                info.setContent(pois[i].name);
+                info.setPosition(latlng);
+
+                //adresse de poi depuis lng & lat
+                var geocoder = new google.maps.Geocoder;
+                var latlng = {
+                    lat: pois[i].lat,
+                    lng: pois[i].lng
+                };
+                geocoder.geocode({
+                    'location': latlng
+                }, function(results, status) {
+                    if (status === 'OK') {
+                        if (results[1]) {
+                            addresss.push(results[1].formatted_address);
+                            // Check if all calls have been processed
+                            if (addresss.length == pois.length) {
+                                someOtherFunction(addresss);
+                            }
+                        } else {
+                            addresss.push("non définie")
+                            if (addresss.length == pois.length) {
+                                someOtherFunction(addresss);
+                            }
+                        }
                     } else {
                         addresss.push("non définie")
                         if (addresss.length == pois.length) {
-                        someOtherFunction(addresss);
+                            someOtherFunction(addresss);
+                        }
                     }
-                    }
-                } else {
-                    addresss.push("non définie")
-                    if (addresss.length == pois.length) {
-                        someOtherFunction(addresss);
-                    }
+                });
+
+            }
+
+            function someOtherFunction(addresss) {
+                for (var i = 0; i < addresss.length; i++) {
+                    var idd = '#'.concat(pois[i].id)
+                    $(idd).append('<i class="material-icons">place</i>' + addresss[i]);
+
                 }
+            }
+
+            var infoWindow = new google.maps.InfoWindow({
+                map: map
             });
 
-         }
+            // localisation d'utilisateur
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
 
-         function someOtherFunction(addresss) {
-            for (var i=0 ; i< addresss.length; i++){
-                var idd = '#'.concat(pois[i].id)
-                $(idd).append('<i class="material-icons">place</i>'+addresss[i]);
-
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Vous êtes ici.');
+                    map.setCenter(pos);
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
             }
-         }
 
-        var infoWindow = new google.maps.InfoWindow({map: map});
-
-        // localisation d'utilisateur
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('Vous êtes ici.');
-                map.setCenter(pos);
-            }, function () {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            alert('Error: Your browser doesn\'t support geolocation.');
-        }
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                alert('Error: Your browser doesn\'t support geolocation.');
             }
-        });
 
 
 
-    }
+            /*var pg = []
+            var groups
+            $.ajax({
+                    url: "${g.createLink(controller: 'grails_project.Groupe', action: 'listgroup')}",
+                    dataType: "json",
+                    success: function(data) {
+                        groups = data
+                    },
+                    error: function(request, status, error) {
 
+                    },
+                    complete: function() {
+
+                        //TODO PIE CHARTS
+                    }
+
+             });*/
+
+
+        }
+    });
+
+
+
+}
 </g:javascript>
 <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=initMap"/>

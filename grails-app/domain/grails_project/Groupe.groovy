@@ -5,7 +5,9 @@ class Groupe {
     String name;
     String description;
 
-    static hasMany = [ images:Image]
+
+    static belongsTo = Poi
+    static hasMany = [pois: Poi, images:Image]
 
     static constraints = {
         name blank: false

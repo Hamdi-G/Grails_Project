@@ -70,6 +70,22 @@
             </div>
         </div>
     </div>
+    <!--<div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header card-header-icon" data-background-color="red">
+                    <i class="material-icons">pie_chart</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">Pie Chart</h4>
+                </div>
+                <div id="chartPreferences" class="ct-chart"></div>
+                <div class="card-footer">
+                    <h6>Legend</h6>
+                </div>
+            </div>
+        </div>
+    </div>-->
 </div>
 </body>
 </html>

@@ -7,10 +7,7 @@ class Poi {
     double lat
     double lng
 
-
-    static belongsTo = [groupe:Groupe]
-
-    static hasMany = [ images:Image]
+    static hasMany = [groups: Groupe, images:Image]
 
     static constraints = {
         name blank: false

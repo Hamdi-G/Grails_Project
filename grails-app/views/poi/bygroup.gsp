@@ -24,23 +24,36 @@
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             <g:each var="i" in="${(1..<grails_project.Groupe.findById(params.id).images.size())}">
-                                <li data-target="#myCarousel" data-slide-to="${i}"></li>
+                                <g:if test="${grails_project.Groupe.findById(params.id).images.size() != 0}">
+                                    <li data-target="#myCarousel" data-slide-to="${i}"></li>
+                                </g:if>
+                                <g:else>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                </g:else>
                             </g:each>
                         </ol>
 
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <g:each status="i" var="img" in="${grails_project.Groupe.findById(params.id).images}">
-                                <g:if test="${i == 0}">
-                                    <div class="item active">
-                                        <asset:image class="img img-responsive center-block" style=" height: 400px"
-                                                     src="${img.name}"/>
-                                    </div>
+                                <g:if test="${grails_project.Groupe.findById(params.id).images.size() != 0}">
+                                    <g:if test="${i == 0}">
+                                        <div class="item active">
+                                            <asset:image class="img img-responsive center-block" style=" height: 400px"
+                                                         src="${img.path}"/>
+                                        </div>
+                                    </g:if>
+                                    <g:else>
+                                        <div class="item">
+                                            <asset:image class="img img-responsive center-block" style=" height: 400px"
+                                                         src="${img.path}"/>
+                                        </div>
+                                    </g:else>
                                 </g:if>
                                 <g:else>
-                                    <div class="item">
+                                    <div class="item active">
                                         <asset:image class="img img-responsive center-block" style=" height: 400px"
-                                                     src="${img.name}"/>
+                                                     src="non_disponible.jpg"/>
                                     </div>
                                 </g:else>
                             </g:each>
@@ -68,57 +81,64 @@
     <br>
 
     <div class="row">
-        <g:each var="pg" in="${grails_project.PoiGroup.all}">
-            <g:if test="${pg.groupe.id.toString() == params.id}">
-                <div class="col-md-4">
-                    <div class="card card-product" data-count="7">
-                        <div class="card-image" data-header-animation="true">
-                            <a href="#pablo">
-                                <asset:image class="img" src="${pg.poi.images[0]}"/>
-                            </a>
-                        </div>
-
-                        <div class="card-content">
-                            <div class="card-actions">
-                                <button type="button" class="btn btn-danger btn-simple fix-broken-card">
-                                    <i class="material-icons">build</i> Fix Header!
-                                </button>
-                                <a href="/poi/show/${pg.poi.id}">
-                                    <button type="button" class="btn btn-default btn-simple" rel="tooltip"
-                                            data-placement="bottom"
-                                            title="" data-original-title="View">
-                                        <i class="material-icons">art_track</i>
-                                    </button></a>
-                                <a href="/poi/edit/${pg.poi.id}">
-                                    <button type="button" class="btn btn-success btn-simple" rel="tooltip"
-                                            data-placement="bottom"
-                                            title="" data-original-title="Edit">
-                                        <i class="material-icons">edit</i>
-                                    </button></a>
-                                <a href="/poi/delete/${pg.poi.id}">
-                                    <button type="button" class="btn btn-danger btn-simple" rel="tooltip"
-                                            data-placement="bottom"
-                                            title="" data-original-title="Remove">
-                                        <i class="material-icons">close</i>
-                                    </button></a>
+        <g:each var="p" in="${grails_project.Poi.all}">
+            <g:each var="g" in="${p.groups}">
+                <g:if test="${g.id.toString() == params.id}">
+                    <div class="col-md-4">
+                        <div class="card card-product" data-count="7">
+                            <div class="card-image" data-header-animation="true">
+                                <a href="#pablo">
+                                    <g:if test="${p.images.size() != 0}">
+                                        <asset:image class="img" src="${p.images[0].path}"/>
+                                    </g:if>
+                                    <g:else>
+                                        <asset:image class="img" src="non_disponible.jpg"/>
+                                    </g:else>
+                                </a>
                             </div>
-                            <h4 class="card-title">
-                                <a href="#pablo">${pg.poi.name}</a>
-                            </h4>
 
-                            <div class="card-description">
-                                ${pg.poi.description}
+                            <div class="card-content">
+                                <div class="card-actions">
+                                    <button type="button" class="btn btn-danger btn-simple fix-broken-card">
+                                        <i class="material-icons">build</i> Fix Header!
+                                    </button>
+                                    <a href="/poi/show/${p.id}">
+                                        <button type="button" class="btn btn-default btn-simple" rel="tooltip"
+                                                data-placement="bottom"
+                                                title="" data-original-title="View">
+                                            <i class="material-icons">art_track</i>
+                                        </button></a>
+                                    <a href="/poi/edit/${p.id}">
+                                        <button type="button" class="btn btn-success btn-simple" rel="tooltip"
+                                                data-placement="bottom"
+                                                title="" data-original-title="Edit">
+                                            <i class="material-icons">edit</i>
+                                        </button></a>
+                                    <a href="/poi/delete/${p.id}">
+                                        <button type="button" class="btn btn-danger btn-simple" rel="tooltip"
+                                                data-placement="bottom"
+                                                title="" data-original-title="Remove">
+                                            <i class="material-icons">close</i>
+                                        </button></a>
+                                </div>
+                                <h4 class="card-title">
+                                    <a href="#pablo">${p.name}</a>
+                                </h4>
+
+                                <div class="card-description">
+                                    ${p.description}
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="card-footer">
-                            <div class="stats">
-                                <p class="category"><i class="material-icons">place</i> Barcelona, Spain</p>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <p class="category"><i class="material-icons">place</i> Barcelona, Spain</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </g:if>
+                </g:if>
+            </g:each>
         </g:each>
     </div>
 </div>

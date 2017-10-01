@@ -1,5 +1,7 @@
 package grails_project
 
+import grails.converters.JSON
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -12,6 +14,10 @@ class GroupeController {
         params.max = Math.min(max ?: 10, 100)
         respond Groupe.list(params), model:[groupeCount: Groupe.count()]
     }
+    def listgroup(){
+        render Groupe.list() as JSON
+    }
+
 
     def show(Groupe groupe) {
         respond groupe
