@@ -38,9 +38,6 @@
 
                     <div class="card-content">
                         <div class="card-actions">
-                            <button type="button" class="btn btn-danger btn-simple fix-broken-card">
-                                <i class="material-icons">build</i> Fix Header!
-                            </button>
                             <a href="/poi/show/${poi.id}">
                                 <button type="button" class="btn btn-default btn-simple" rel="tooltip"
                                         data-placement="bottom"

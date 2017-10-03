@@ -4,17 +4,34 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'poi.label', default: 'Poi')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
+    <asset:stylesheet src="application.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
 
 <body>
+<button class="btn btn-primary btn-round">
+    <a href="${createLink(uri: '/')}" style="color: white">
+        <i class="material-icons">home</i> Home
+    </a>
+</button>
+<button class="btn btn-primary btn-round">
+    <g:link class="create" action="create"><g:message args="[entityName]"/><i class="material-icons"
+                                                                              style="color: white">add</i>create</g:link>
+</a>
+</button>
 
+<button class="btn btn-primary btn-round">
+    <g:link class="list" action="index"><g:message args="[entityName]"/><i class="material-icons"
+                                                                           style="color: white">list</i> list</g:link>
+</a>
+</button>
 <div id="edit-poi" class="content scaffold-create" role="main">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card">
-                    <form resource="${this.poi}" method="PUT" class="form-horizontal"
-                          novalidate="novalidate">
+                    <form action="/poi/update/${this.poi.id}" method="post" ><input type="hidden" name="_method" value="PUT" id="_method" />
+                        <input type="hidden" name="version" value="1" id="version" />
                         <div class="card-header card-header-text" data-background-color="rose">
                             <h4 class="card-title">Modification d'un lieu</h4>
                         </div>
@@ -118,24 +135,25 @@
                                     </div>
                                 </div>
 
+                                <div id="dragandrophandler">Drag & Drop Files Here</div>
+                                <br><br>
+                                <div id="status1"></div>
+                                <input class="file-path validate" type="text" name="image1" id="image1" style="visibility: hidden">
 
-
-
-
-
-
-
-
-
-
-
-
-                                <g:each var="image" in="${poi.images}">
-                                    <asset:image src="${image.name}" width="300" height="300" display="inline-block"
-                                                 style="float:left;margin-left: 10px;margin-right: 10px;"/></a>
-                                </g:each>
-                                <div id="map" style="width:100%;height:400px;background:yellow"></div>
-                                <g:javascript>
+                            <div class="card-footer text-center">
+                                <fieldset class="buttons">
+                                    <button type="submit" class="btn btn-rose btn-fill save">Mise à jour</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div id="map" style="width:100%;height:400px;background:#a0dbe8;"></div>
+                    <br>
+                    <g:javascript>
                 function myMap() {
 
                     var latValue = "${poi.lat}";
@@ -159,26 +177,9 @@
                     });
                 }
 
-                                </g:javascript>
+                    </g:javascript>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=myMap"></script>
 
-                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=myMap"></script>
-
-
-
-
-
-
-
-                            </fieldset>
-
-
-                            <div class="card-footer text-center">
-                                <fieldset class="buttons">
-                                    <button type="submit" class="btn btn-rose btn-fill save">Mise à jour</button>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -211,23 +212,11 @@
 
 
 
-%{--<button class="btn btn-primary btn-round">
-    <a href="${createLink(uri: '/')}" style="color: white">
-        <i class="material-icons">home</i> Home
-    </a>
-</button>
-<button class="btn btn-primary btn-round">
-    <g:link class="create" action="create"><g:message args="[entityName]"/><i class="material-icons"
-                                                                              style="color: white">add</i>create</g:link>
-</a>
-</button>
 
-<button class="btn btn-primary btn-round">
-    <g:link class="list" action="index"><g:message args="[entityName]"/><i class="material-icons"
-                                                                           style="color: white">list</i> list</g:link>
-</a>
-</button>
 
+
+
+%{--
 <div id="edit-poi" class="content scaffold-edit" role="main">
     <h1><g:message code="default.edit.label" args="[entityName]"/></h1>
     <g:if test="${flash.message}">

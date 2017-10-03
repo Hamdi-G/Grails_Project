@@ -40,8 +40,13 @@ class GroupeController {
             respond groupe.errors, view:'create'
             return
         }
-        groupe = new Groupe(params)
-        groupe.addToImages( new Image(params))
+        def imgs = params.image1.toString()
+        def list = []
+        list.addAll(imgs.split())
+        list.each {
+            def image = new Image(name:it.toString())
+            groupe.addToImages(image)
+        }
         groupe.save flush:true
 
         request.withFormat {

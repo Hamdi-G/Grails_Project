@@ -42,9 +42,24 @@ class PoiController {
             return
         }
 
-        poi = new Poi(params)
-        def image = new Image(params)
-        poi.addToImages(image)
+        //poi = new Poi(params)
+        //if(params.fileupload != "") {
+          /*  def myList = []
+        System.out.print(params)
+            myList.add(params.images)
+            System.out.print(myList)*/
+            def imgs = params.image1.toString()
+            def list = []
+            list.addAll(imgs.split())
+            list.each {
+                def image = new Image(name:it.toString())
+                poi.addToImages(image)
+            }
+
+//            params.fileupload.transferTo(new java.io.File(grailsApplication.config.updateFolder + params.image))
+        //}
+        //poi.addToImages(image)
+        //params.fileUpload.transferTo(new java.io.File("C:/xampp/htdocs/img/"+params.image))
         poi.save flush:true
 
         request.withFormat {
@@ -57,18 +72,21 @@ class PoiController {
     }
 
     def edit(Poi poi) {
+
         respond poi
     }
 
     @Transactional
     def update(Poi poi) {
+        System.out.print("update---")
         if (poi == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        if (poi.hasErrors()) {
+        if (poi.hasErrors()){
+            System.out.print("ok---")
             transactionStatus.setRollbackOnly()
             respond poi.errors, view:'edit'
             return

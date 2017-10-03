@@ -45,7 +45,7 @@
                                             <div class="img-container">
                                                 <g:if test="${groupe.images.size() != 0 && groupe.images != null}">
                                                     <asset:image class="img img-responsive center-block" style=" height: 120px"
-                                                                 src="${groupe.images[0].path}"/>
+                                                                 src="${groupe.images[0].name}"/>
                                                 </g:if>
                                                 <g:else>
                                                     <asset:image class="img img-responsive center-block" style=" height: 120px"

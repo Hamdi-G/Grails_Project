@@ -44,7 +44,7 @@
 
                 <div class="card-footer">
                     <div class="stats">
-                        <a href="">Voir tous</a>
+                        <a href="/groupe/index">Voir tous</a>
                     </div>
                 </div>
             </div>

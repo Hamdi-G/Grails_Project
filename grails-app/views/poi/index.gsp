@@ -46,7 +46,7 @@
                                         <div class="img-container">
                                             <g:if test="${poi.images.size() != 0 && poi.images != null}">
                                             <asset:image class="img img-responsive center-block" style=" height: 120px"
-                                                         src="${poi.images[0].path}"/>
+                                                         src="${poi.images[0].name}"/>
                                             </g:if>
                                             <g:else>
                                                 <asset:image class="img img-responsive center-block" style=" height: 120px"

@@ -9,6 +9,18 @@
 
 <body>
 
+<button class="btn btn-primary btn-round">
+    <a href="${createLink(uri: '/')}" style="color: white">
+        <i class="material-icons">home</i> Home
+    </a>
+</button>
+
+<button class="btn btn-primary btn-round">
+    <g:link class="list" action="index"><g:message args="[entityName]"/><i class="material-icons"
+                                                                           style="color: white">list</i> list</g:link>
+</a>
+</button>
+
 <div id="create-groupe" class="content scaffold-create" role="main">
     <div class="container-fluid">
         <div class="row">
@@ -17,7 +29,7 @@
                     <form action="/groupe/save" method="post" id="TypeValidation" class="form-horizontal"
                           novalidate="novalidate">
                         <div class="card-header card-header-text" data-background-color="rose">
-                            <h4 class="card-title">Création d'un lieu</h4>
+                            <h4 class="card-title">Création d'une catégorie</h4>
                         </div>
 
                         <div class="card-content">
@@ -79,22 +91,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail">
-                                            <img src="../../assets/img/image_placeholder.jpg" alt="...">
-                                        </div>
-                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                        <div>
-                                            <span class="btn btn-rose btn-round btn-file">
-                                                <span class="fileinput-new">Select image</span>
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="file" name="${Image.name}">
-                                            </span>
-                                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                        </div>
-                                    </div>
+                                <div style="margin-left: 170px">
+                                    <div id="dragandrophandler">Drag & Drop Files Here</div>
+                                    <br><br>
+                                    <div id="status1"></div>
                                 </div>
+
+                                <input class="file-path validate" type="text" name="image1" id="image1" style="visibility: hidden">
 
                             </fieldset>
 
@@ -112,49 +115,5 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-<a href="#create-groupe" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
-                                                               default="Skip to content&hellip;"/></a>
-
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]"/></g:link></li>
-    </ul>
-</div>
-
-<div id="create-groupe" class="content scaffold-create" role="main">
-    <h1><g:message code="default.create.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
-    <g:hasErrors bean="${this.groupe}">
-        <ul class="errors" role="alert">
-            <g:eachError bean="${this.groupe}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
-                        error="${error}"/></li>
-            </g:eachError>
-        </ul>
-    </g:hasErrors>
-    <g:form resource="${this.groupe}" method="POST">
-        <fieldset class="form">
-            <f:all bean="groupe"/>
-        </fieldset>
-        <fieldset class="buttons">
-            <g:submitButton name="create" class="save"
-                            value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-        </fieldset>
-    </g:form>
-</div>
 </body>
 </html>
