@@ -1,6 +1,7 @@
 package grails_project
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -15,6 +16,7 @@ class GroupeController {
         respond Groupe.list(params), model:[groupeCount: Groupe.count()]
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def listgroup(){
         render Groupe.list() as JSON
     }

@@ -11,7 +11,7 @@ class UrlMappings {
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
-        "/poi/bygroup"(view:"/poi/bygroup")
+        "/groupe/bygroup"(view:"/groupe/bygroup")
         "/poi/showOnMap"(view:"/poi/showOnMAp")
     }
 }

@@ -44,8 +44,7 @@
 
                 <div class="card-footer">
                     <div class="stats">
-                        <a href="/groupe/index">Voir tous</a>
-                    </div>
+                        <a data-toggle="collapse" href="#componentsExamples">Voir tous</a>                    </div>
                 </div>
             </div>
         </div>

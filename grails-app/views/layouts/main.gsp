@@ -92,11 +92,9 @@
                         <ul class="nav">
                             <li>
                                 <a>
-                                    <span class="label label-info">
-                                        <sec:ifAnyGranted roles="ROLE_ADMIN">Administrateur</sec:ifAnyGranted>
-                                        <sec:ifAnyGranted roles="ROLE_MODER">Modérateur</sec:ifAnyGranted>
-                                        <sec:ifAnyGranted roles="ROLE_USER">Utilisateur</sec:ifAnyGranted>
-                                    </span>
+                                        <sec:ifAnyGranted roles="ROLE_ADMIN"><span class="label label-rose">administrateur</span></sec:ifAnyGranted>
+                                        <sec:ifAnyGranted roles="ROLE_MODERATOR"><span class="label label-success">modérateur</span></sec:ifAnyGranted>
+                                        <sec:ifAnyGranted roles="ROLE_USER"><span class="label label-info">utilisateur</span></sec:ifAnyGranted>
                                 </a>
 
                             </li>
@@ -148,8 +146,8 @@
                         <ul class="nav" id="categories">
                             <g:each var="cat" in="${grails_project.Groupe.all}">
                                 <li>
-                                    <a href="/poi/bygroup?id=${cat.id}">
-                                        <span class="sidebar-normal">${cat.getName()}</span>
+                                    <a href="/groupe/bygroup?id=${cat.id}"><span
+                                            class="sidebar-normal">${cat.getName()}</span>
                                     </a>
                                 </li>
                             </g:each>
@@ -157,35 +155,35 @@
                     </div>
                 </li>
                 <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MODERATOR">
-                <li>
-                    <a data-toggle="collapse" href="#formsExamples">
-                        <i class="material-icons">settings</i>
+                    <li>
+                        <a data-toggle="collapse" href="#formsExamples">
+                            <i class="material-icons">settings</i>
 
-                        <p>Gestion de site
-                            <b class="caret"></b>
-                        </p>
-                    </a>
+                            <p>Gestion de site
+                                <b class="caret"></b>
+                            </p>
+                        </a>
 
-                    <div class="collapse" id="formsExamples">
-                        <ul class="nav">
-                            <li>
-                                <a href="/user/">
-                                    <span class="sidebar-normal">Utilisateurs</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/poi/">
-                                    <span class="sidebar-normal">Lieux</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/groupe/">
-                                    <span class="sidebar-normal">Catégories</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                        <div class="collapse" id="formsExamples">
+                            <ul class="nav">
+                                <li>
+                                    <a href="/user/">
+                                        <span class="sidebar-normal">Utilisateurs</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/poi/">
+                                        <span class="sidebar-normal">Lieux</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/groupe/">
+                                        <span class="sidebar-normal">Catégories</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </sec:ifAnyGranted>
                 <li>
                     <a href="#">
@@ -464,16 +462,43 @@
 
 
 
+var options = {
+            "decimal":        "",
+            "emptyTable":     "aucune donnée disponible",
+            "info":           "Affichage de _START_ à _END_ de _TOTAL_ entrées",
+            "infoEmpty":      "Affichage de 0 à 0 de 0 entrées",
+            "infoFiltered":   "(filtré de _MAX_ entrées totales)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Afficher _MENU_ entrées",
+            "loadingRecords": "Chargement...",
+            "processing":     "Traitement...",
+            "search":         "Chercher:",
+            "zeroRecords":    "Aucun enregistrements correspondants trouvés",
+            "paginate": {
+                "first":      "Premier",
+                "last":       "Dernier",
+                "next":       "Suivant",
+                "previous":   "Précédent"
+            },
+            "aria": {
+                "sortAscending":  ": activer pour trier la colonne en ordre croissant",
+                "sortDescending": ": activer pour trier la colonne en ordre decroissant"
+            }
+        }
 
-$('#usersdatatables').DataTable();
-$('#poisdatatables').DataTable();
-$('#groupsdatatables').DataTable();
+$('#usersdatatables').DataTable({language: options});
+$('#poisdatatables').DataTable({language: options});
+$('#groupsdatatables').DataTable({language: options});
 
 
 
-
+var pois
+var adresses = []
 function initMap() {
-    var pois
+
+
+
     $.ajax({
         url: "${g.createLink(controller: 'poi', action: 'listpoi')}",
         dataType: "json",
@@ -484,7 +509,7 @@ function initMap() {
 
         },
         complete: function() {
-            var map = new google.maps.Map(document.getElementById('map1'), {
+            var map1 = new google.maps.Map(document.getElementById('map1'), {
                 center: {
                     lat: 43.729497,
                     lng: 7.146764
@@ -492,7 +517,7 @@ function initMap() {
                 zoom: 10,
             });
             //ajout du marquer/adresse pour chaque poi
-            var addresss = []
+
             for (var i = 0; i < pois.length; i++) {
 
 
@@ -504,57 +529,21 @@ function initMap() {
                 /*//marquer
                 var marker = new google.maps.Marker({
                    position: latlng,
-                   map: map
+                   map: map1
                  });*/
                 //legende
                 var info = new google.maps.InfoWindow({
-                    map: map
+                    map: map1
                 });
                 info.setContent(pois[i].name);
                 info.setPosition(latlng);
-
-                //adresse de poi depuis lng & lat
-                var geocoder = new google.maps.Geocoder;
-                var latlng = {
-                    lat: pois[i].lat,
-                    lng: pois[i].lng
-                };
-                geocoder.geocode({
-                    'location': latlng
-                }, function(results, status) {
-                    if (status === 'OK') {
-                        if (results[1]) {
-                            addresss.push(results[1].formatted_address);
-                            // Check if all calls have been processed
-                            if (addresss.length == pois.length) {
-                                someOtherFunction(addresss);
-                            }
-                        } else {
-                            addresss.push("non définie")
-                            if (addresss.length == pois.length) {
-                                someOtherFunction(addresss);
-                            }
-                        }
-                    } else {
-                        addresss.push("non définie")
-                        if (addresss.length == pois.length) {
-                            someOtherFunction(addresss);
-                        }
-                    }
-                });
+                geo(i);
 
             }
 
-            function someOtherFunction(addresss) {
-                for (var i = 0; i < addresss.length; i++) {
-                    var idd = '#'.concat(pois[i].id)
-                    $(idd).append('<i class="material-icons">place</i>' + addresss[i]);
-
-                }
-            }
 
             var infoWindow = new google.maps.InfoWindow({
-                map: map
+                map: map1
             });
 
             // localisation d'utilisateur
@@ -567,13 +556,13 @@ function initMap() {
 
                     infoWindow.setPosition(pos);
                     infoWindow.setContent('Vous êtes ici.');
-                    map.setCenter(pos);
+                    map1.setCenter(pos);
                 }, function() {
-                    handleLocationError(true, infoWindow, map.getCenter());
+                    handleLocationError(true, infoWindow, map1.getCenter());
                 });
             } else {
                 // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map.getCenter());
+                handleLocationError(false, infoWindow, map1.getCenter());
             }
 
             function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -583,55 +572,113 @@ function initMap() {
         }
     });
 
-    var groups
-    var ss =[]
-    var total = 0
-            $.ajax({
-                    url: "${g.createLink(controller: 'grails_project.Groupe', action: 'listgroup')}",
-                    dataType: "json",
-                    success: function(data) {
-                        groups = data
-                    },
-                    error: function(request, status, error) {
-
-                    },
-                    complete: function() {
 
 
-
-                        for (var i=0; i < groups.length ; i++){
-                            ss.push(parseInt(groups[i].pois.length.toString()))
-                            total += parseInt(groups[i].pois.length.toString())
-
-
-
-                        }
-                        //alert(JSON.stringify(total))
-                        var percent = []
-                        for (var i=0; i < ss.length ; i++){
-                            percent.push(((ss[i] * 100 )/ total).toString()+'% '+groups[i].name.toString() )
-
-                        }
-                        //alert(JSON.stringify(percent))
-
-                        var dataPreferences = {
-                            labels: percent,
-                            series: ss
-                        };
-
-                        var optionsPreferences = {
-                            height: '280px'
-                        };
-
-                        Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-                    }
-
-             });
-
-
+    var map2 = new google.maps.Map(document.getElementById('mappoi'), {
+                center: {
+                    lat: 43.729497,
+                    lng: 7.146764
+                },
+                zoom: 10,
+            });
+                var latlngpoi = {
+                    lat: parseFloat($( "div#latt" ).text()),
+                    lng:  parseFloat($( "div#lngg" ).text())
+                };
+                console.log(latlngpoi)
+               var marker1 = new google.maps.Marker({
+                   position: latlngpoi,
+                   map: map2
+                 });
 
 
 }
+//adresse de poi depuis lng & lat
+function geo(i) {
+    //adresse de poi depuis lng & lat
+    var geocoder = new google.maps.Geocoder;
+    var latlng = {
+        lat: pois[i].lat,
+        lng: pois[i].lng
+    };
+    geocoder.geocode({
+        'location': latlng
+    }, function(results, status) {
+        if (status === 'OK') {
+            if (results[1]) {
+                adresses.push(results[1].formatted_address);
+                // Check if all calls have been processed
+                if (adresses.length == pois.length) {
+                    someOtherFunction(adresses);
+                }
+            } else {
+                adresses.push("non définie")
+                if (adresses.length == pois.length) {
+                    someOtherFunction(adresses);
+                }
+            }
+        } else {
+            adresses.push("non définie")
+            if (adresses.length == pois.length) {
+                someOtherFunction(adresses);
+            }
+        }
+    });
+}
+
+function someOtherFunction(adresses) {
+    for (var i = 0; i < adresses.length; i++) {
+        var idd = '#'.concat(pois[i].id)
+        $(idd).append('<i class="material-icons">place</i>' + adresses[i]);
+
+    }
+}
+
+var groups
+    var ss = []
+    var total = 0
+    $.ajax({
+        url: "${g.createLink(controller: 'grails_project.Groupe', action: 'listgroup')}",
+        dataType: "json",
+        success: function(data) {
+            groups = data
+        },
+        error: function(request, status, error) {
+
+        },
+        complete: function() {
+
+
+
+            for (var i = 0; i < groups.length; i++) {
+                ss.push(parseInt(groups[i].pois.length.toString()))
+                total += parseInt(groups[i].pois.length.toString())
+
+
+
+            }
+            //alert(JSON.stringify(total))
+            var percent = []
+            for (var i = 0; i < ss.length; i++) {
+                percent.push(((ss[i] * 100) / total).toString() + '% ' + groups[i].name.toString())
+
+            }
+            //alert(JSON.stringify(percent))
+
+            var dataPreferences = {
+                labels: percent,
+                series: ss
+            };
+
+            var optionsPreferences = {
+                height: '280px'
+            };
+
+            Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+        }
+
+    });
+
 </g:javascript>
 <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=initMap"/>

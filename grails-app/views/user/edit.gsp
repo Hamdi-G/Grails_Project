@@ -34,29 +34,52 @@
                             <fieldset class="form">
 
                                 <div class="row">
-                                    <label class="col-sm-2 label-on-left">Mot de passe</label>
+                                    <label class="col-sm-2 label-on-left">Idantifiant</label>
 
                                     <div class="col-sm-7">
                                         <div class="form-group label-floating is-empty fieldcontain required">
                                             <label class="control-label"></label>
-                                            <input class="form-control" type="text" name="password" id="password" value="${user.password}"
+                                            <input class="form-control" type="text" name="username" id="username"
+                                                   value="${user.username}"
                                                    required="true"
                                                    aria-required="true">
                                             <span class="material-input"></span></div>
                                     </div>
                                 </div>
 
-
                                 <div class="row">
-                                    <label class="col-sm-2 label-on-left">Idantifiant</label>
+                                    <label class="col-sm-2 label-on-left">Mot de passe</label>
 
                                     <div class="col-sm-7">
                                         <div class="form-group label-floating is-empty fieldcontain required">
                                             <label class="control-label"></label>
-                                            <input class="form-control" type="text" name="username" id="username" value="${user.username}"
+                                            <input class="form-control" type="text" name="password" id="password"
+                                                   value="${user.password}"
                                                    required="true"
                                                    aria-required="true">
                                             <span class="material-input"></span></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 label-on-left">Rôle</label>
+
+                                    <div class="col-sm-7">
+                                        <div class="btn-group ">
+                                            <select name="roleId" required
+                                                    id="roleId" class="selectpicker"
+                                                    data-style="btn btn-info btn-round" title="Choisir un rôle">
+                                                <g:each var="role" in="${Grails_Project.Role.all}">
+                                                    <g:if test="${Grails_Project.UserRole.findByUser(user).getRole().id == role.id}">
+                                                        <option selected
+                                                                value="${role.id}">${role.authority.substring(5).toLowerCase()}</option>
+                                                    </g:if>
+                                                    <g:else>
+                                                        <option value="${role.id}">${role.authority.substring(5).toLowerCase()}</option>
+                                                    </g:else>
+                                                </g:each>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 

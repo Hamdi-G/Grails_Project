@@ -1,6 +1,8 @@
 package grails_project
 
+import Grails_Project.Role
 import Grails_Project.User
+import Grails_Project.UserRole
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -38,6 +40,8 @@ class UserController {
         }
 
         user.save flush:true
+        UserRole.create(user,Role.findById(params.roleId),true);
+
 
         request.withFormat {
             form multipartForm {
@@ -67,6 +71,8 @@ class UserController {
         }
 
         user.save flush:true
+        UserRole.remove(user, UserRole.findByUser(user).getRole());
+        UserRole.create(user, Role.findById(params.roleId),true)
 
         request.withFormat {
             form multipartForm {
@@ -86,6 +92,7 @@ class UserController {
             return
         }
 
+        UserRole.remove(user, UserRole.findByUser(user).getRole());
         user.delete flush:true
 
         request.withFormat {

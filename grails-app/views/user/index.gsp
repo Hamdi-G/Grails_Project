@@ -1,3 +1,4 @@
+<%@ page import="Grails_Project.Role" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +21,12 @@
 
                     <div class="toolbar">
                     <!--        Here you can write extra buttons/actions for the toolbar              -->
-                        <g:link class="create" action="create">
-                            <button id="addnew" class="btn btn-primary btn-round btn-fab btn-fab-mini"
-                                    style="float: right;"><i class="material-icons">person_add</i></button>
-                        </g:link>
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
+                            <g:link class="create" action="create">
+                                <button id="addnew" class="btn btn-primary btn-round btn-fab btn-fab-mini"
+                                        style="float: right;"><i class="material-icons">person_add</i></button>
+                            </g:link>
+                        </sec:ifAnyGranted>
                     </div>
 
                     <div class="material-datatables">
@@ -34,6 +37,7 @@
                             <thead>
                             <tr>
                                 <th>Nom d'utilisateur</th>
+                                <th>rôle</th>
                                 <th class='hidden-350'>expiré</th>
                                 <th class='hidden-1024'>verrouillé</th>
                                 <th class='hidden-480'>Activé</th>
@@ -43,24 +47,74 @@
                             </thead>
                             <tbody>
                             <g:each in="${userList}" var="user">
-                                <tr>
-                                    <td><a href="/user/show/${user.id}">${fieldValue(bean: user, field: "username")}</a>
-                                    </td>
-                                    <td class='hidden-350'><g:formatBoolean boolean="${user.accountExpired}"/></td>
-                                    <td class='hidden-1024'><g:formatBoolean boolean="${user.accountLocked}"/></td>
-                                    <td class='hidden-480'><g:formatBoolean boolean="${user.enabled}"/></td>
-                                    <td class='hidden-480'><g:formatBoolean boolean="${user.passwordExpired}"/></td>
-                                    <td class="td-actions text-right">
-                                        <a href="/user/show/${user.id}"
-                                           class='btn btn-simple btn-info'><i
-                                                class='material-icons'>person</i></a>
-                                        <a href="/user/edit/${user.id}"
-                                           class='btn btn-simple btn-success'><i
-                                                class='material-icons'>create</i></a>
-                                        <a href="/user/delete/${user.id}"
-                                           class='btn btn-simple btn-danger'><i
-                                                class='material-icons'>delete</i></a></td>
-                                </tr>
+                                <sec:ifAnyGranted roles="ROLE_MODERATOR">
+                                    <g:if test="${Grails_Project.UserRole.findByUser(user).getRole().getAuthority() == 'ROLE_USER'}">
+                                        <tr>
+                                            <td><a href="/user/show/${user.id}">${fieldValue(bean: user, field: "username")}</a>
+                                            </td>
+                                            <td class='hidden-350'>
+                                                <g:if test="${Grails_Project.UserRole.findByUser(user).getRole().getAuthority().substring(5,6) == "A"}">
+                                                    <span class="label label-rose">administrateur</span>
+                                                </g:if>
+                                                <g:if test="${Grails_Project.UserRole.findByUser(user).getRole().getAuthority().substring(5,6) == "M"}">
+                                                    <span class="label label-success">modérateur</span>
+                                                </g:if>
+                                                <g:if test="${Grails_Project.UserRole.findByUser(user).getRole().getAuthority().substring(5,6) == "U"}">
+                                                    <span class="label label-info">utilisateur</span>
+                                                </g:if>
+
+                                            </td>
+                                            <td class='hidden-350'><g:formatBoolean
+                                                    boolean="${user.accountExpired}"/></td>
+                                            <td class='hidden-1024'><g:formatBoolean
+                                                    boolean="${user.accountLocked}"/></td>
+                                            <td class='hidden-480'><g:formatBoolean boolean="${user.enabled}"/></td>
+                                            <td class='hidden-480'><g:formatBoolean
+                                                    boolean="${user.passwordExpired}"/></td>
+                                            <td class="td-actions text-right">
+                                                <a href="/user/show/${user.id}"
+                                                   class='btn btn-simple btn-info'><i
+                                                        class='material-icons'>person</i></a>
+                                                <a href="/user/edit/${user.id}"
+                                                   class='btn btn-simple btn-success'><i
+                                                        class='material-icons'>create</i></a>
+                                            </td>
+                                        </tr>
+                                    </g:if>
+                                </sec:ifAnyGranted>
+                                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                                    <tr>
+                                        <td><a href="/user/show/${user.id}">${fieldValue(bean: user, field: "username")}</a>
+                                        </td>
+                                        <td class='hidden-350'>
+                                            <g:if test="${Grails_Project.UserRole.findByUser(user).getRole().getAuthority().substring(5,6) == "A"}">
+                                                <span class="label label-rose">administrateur</span>
+                                            </g:if>
+                                            <g:if test="${Grails_Project.UserRole.findByUser(user).getRole().getAuthority().substring(5,6) == "M"}">
+                                                <span class="label label-success">modérateur</span>
+                                            </g:if>
+                                            <g:if test="${Grails_Project.UserRole.findByUser(user).getRole().getAuthority().substring(5,6) == "U"}">
+                                                <span class="label label-info">utilisateur</span>
+                                            </g:if>
+
+                                        </td>
+                                        <td class='hidden-350'><g:formatBoolean boolean="${user.accountExpired}"/></td>
+                                        <td class='hidden-1024'><g:formatBoolean boolean="${user.accountLocked}"/></td>
+                                        <td class='hidden-480'><g:formatBoolean boolean="${user.enabled}"/></td>
+                                        <td class='hidden-480'><g:formatBoolean boolean="${user.passwordExpired}"/></td>
+                                        <td class="td-actions text-right">
+                                            <a href="/user/show/${user.id}"
+                                               class='btn btn-simple btn-info'><i
+                                                    class='material-icons'>person</i></a>
+                                            <a href="/user/edit/${user.id}"
+                                               class='btn btn-simple btn-success'><i
+                                                    class='material-icons'>create</i></a>
+                                            <a href="/user/delete/${user.id}"
+                                               class='btn btn-simple btn-danger'><i
+                                                    class='material-icons'>delete</i></a>
+                                        </td>
+                                    </tr>
+                                </sec:ifAnyGranted>
                             </g:each>
                             </tbody>
 

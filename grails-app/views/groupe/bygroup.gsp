@@ -73,6 +73,23 @@
                     <h5>Description:</h5>
                     <h6 class="card-description">${grails_project.Groupe.findById(params.id).description}</h6>
                 </div>
+                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MODERATOR">
+
+                    <div class="card-footer text-center">
+                        <g:form resource="${grails_project.Groupe.findById(params.id)}" method="DELETE">
+                            <fieldset class="buttons">
+
+                                <g:link class="edit" action="edit"
+                                        resource="${grails_project.Groupe.findById(params.id)}"><div
+                                        class="btn btn-success btn-fill">Modifier</div></g:link>
+                                <input class="delete btn btn-danger btn-fill" type="submit"
+                                       value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                       onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+                            </fieldset>
+                        </g:form>
+                    </div>
+                </sec:ifAnyGranted>
+
             </div>
         </div>
     </div>
@@ -124,8 +141,7 @@
                                     </sec:ifAnyGranted>
                                 </div>
                                 <h4 class="card-title">
-                                    <a href="#pablo">${p.name}</a>
-                                </h4>
+                                    <a href="/poi/show/${p.id}">${p.name}</a>                                </h4>
 
                                 <div class="card-description">
                                     ${p.description}
@@ -134,7 +150,7 @@
 
                             <div class="card-footer">
                                 <div class="stats">
-                                    <p class="category"><i class="material-icons">place</i> Barcelona, Spain</p>
+                                    <p class="category" id="${p.id}"></p>
                                 </div>
                             </div>
                         </div>
