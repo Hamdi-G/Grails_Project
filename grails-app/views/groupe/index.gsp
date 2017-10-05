@@ -44,21 +44,22 @@
                                         <td>
                                             <div class="img-container">
                                                 <g:if test="${groupe.images.size() != 0 && groupe.images != null}">
-                                                    <asset:image class="img img-responsive center-block" style=" height: 120px"
-                                                                 src="${groupe.images[0].name}"/>                                                </g:if>
+                                                    <img class="img img-responsive center-block" style=" height: 120px"
+                                                                 src="${grailsApplication.config.server.pathServer}/images/${groupe.images[0].name}"/>
+                                                </g:if>
                                                 <g:else>
-                                                    <asset:image class="img img-responsive center-block" style=" height: 120px"
-                                                                 src="non_disponible.jpg"/>
+                                                    <img class="img img-responsive center-block" style=" height: 120px"
+                                                         src="${grailsApplication.config.server.pathServer}/images/$non_disponible.jpg"/>
                                                 </g:else>
                                             </div>
                                         </td>
                                         <td class="td-name">${groupe.name}                                            <br>
-                                            <a href="/groupe/bygroup?id=${groupe.id}"><small>${groupe.pois.size()} lieux dans cette catégorie  <i                                                    class='material-icons'>open_in_new</i></small></a>
+                                            <a href="/groupe/show/${groupe.id}"><small>${groupe.pois.size()} lieux dans cette catégorie  <i                                                    class='material-icons'>open_in_new</i></small></a>
                                         </td>
 
                                         <td class='hidden-480 text-left'>${groupe.description}</td>
                                         <td class="td-actions text-right">
-                                            <a href="/groupe/bygroup?id=${groupe.id}"                                               class='btn btn-simple btn-info'><i
+                                            <a href="/groupe/show/${groupe.id}"                                               class='btn btn-simple btn-info'><i
                                                     class='material-icons'>visibility</i></a>
                                             <a href="/groupe/edit/${groupe.id}"
                                                class='btn btn-simple btn-success'><i

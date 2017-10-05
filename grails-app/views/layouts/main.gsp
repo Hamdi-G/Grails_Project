@@ -146,7 +146,7 @@
                         <ul class="nav" id="categories">
                             <g:each var="cat" in="${grails_project.Groupe.all}">
                                 <li>
-                                    <a href="/groupe/bygroup?id=${cat.id}"><span
+                                    <a href="/groupe/show/${cat.id}"><span
                                             class="sidebar-normal">${cat.getName()}</span>
                                     </a>
                                 </li>

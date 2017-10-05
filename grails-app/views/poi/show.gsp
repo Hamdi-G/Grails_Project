@@ -41,17 +41,14 @@
                                 <g:each status="i" var="img" in="${poi.images}">
                                     <g:if test="${poi.images.size() != 0}">
                                         <g:if test="${i == 0}">
-                                            <div class="item active">
-                                                <asset:image class="img img-responsive center-block"
-                                                             style=" height: 400px"
-                                                             src="${img.name}"/>
+                                            <img class="img img-responsive center-block" style=" height: 400px"
+                                                 src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
                                             </div>
                                         </g:if>
                                         <g:else>
                                             <div class="item">
-                                                <asset:image class="img img-responsive center-block"
-                                                             style=" height: 400px"
-                                                             src="${img.name}"/>
+                                                <img class="img img-responsive center-block" style=" height: 400px"
+                                                     src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
                                             </div>
                                         </g:else>
                                     </g:if>
@@ -143,5 +140,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

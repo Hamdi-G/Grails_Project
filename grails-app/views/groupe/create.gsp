@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <form action="/groupe/save" method="post" id="TypeValidation" class="form-horizontal"
-                          novalidate="novalidate">
+                          novalidate="novalidate" enctype="multipart/form-data">
                         <div class="card-header card-header-text" data-background-color="rose">
                             <h4 class="card-title">Création d'une catégorie</h4>
                         </div>
@@ -97,7 +97,7 @@
                                     <div id="status1"></div>
                                 </div>
 
-                                <input class="file-path validate" type="text" name="image1" id="image1" style="visibility: hidden">
+                                <input type="text" name="image1" id="image1" style="visibility: hidden">
 
                             </fieldset>
 
