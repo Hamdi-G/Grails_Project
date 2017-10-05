@@ -97,7 +97,10 @@ dataSource:
     driverClassName: org.h2.Driver
     username: sa
     password: ''
-
+server:
+    port: 9999
+    uploadImage: 'C:/xampp/htdocs/images/'
+    pathServer: 'http://localhost:80'
 environments:
     development:
         dataSource:
@@ -129,5 +132,4 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
-server:
-    port: 9999
+

@@ -12,8 +12,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form resource="${this.groupe}" method="PUT" class="form-horizontal"
-                          novalidate="novalidate">
+                    <form action="/groupe/update/${this.groupe.id}" method="post" enctype="multipart/form-data"><input type="hidden" name="_method" value="PUT" id="_method" />
+                        <input type="hidden" name="version" value="1" id="version" />
+
                         <div class="card-header card-header-text" data-background-color="rose">
                             <h4 class="card-title">Modification d'une catégorie</h4>
                         </div>
@@ -87,8 +88,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div style="margin-left: 170px">
+                                    <div id="dragandrophandler">Drag & Drop Files Here</div>
+                                    <br><br>
+                                    <div id="status1"></div>
+                                </div>
 
-                            </fieldset>
+                                <input class="file-path validate" type="text" name="image1" id="image1" style="visibility: hidden">
+                                <div class="img-container">
+
+
+                                    <g:each var="imag" in="${groupe.images}">
+                                        <ul>
+                                            <li><img src="${grailsApplication.config.server.pathServer}/images/${imag.name}" width="250" height="200"/></li>
+                                        </ul>
+                                    </g:each>
+                                </div>
+                        </fieldset>
 
 
                             <div class="card-footer text-center">

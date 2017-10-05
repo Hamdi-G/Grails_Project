@@ -44,24 +44,16 @@ class PoiController {
             return
         }
 
-        //poi = new Poi(params)
-        //if(params.fileupload != "") {
-          /*  def myList = []
-        System.out.print(params)
-            myList.add(params.images)
-            System.out.print(myList)*/
-            def imgs = params.image1.toString()
-            def list = []
-            list.addAll(imgs.split())
-            list.each {
-                def image = new Image(name:it.toString())
-                poi.addToImages(image)
-            }
+        def file = request.getFile('file')
+        file.transferTo(new File(grailsApplication.config.server.uploadImage + file.getOriginalFilename()))
 
-//            params.fileupload.transferTo(new java.io.File(grailsApplication.config.updateFolder + params.image))
-        //}
-        //poi.addToImages(image)
-        //params.fileUpload.transferTo(new java.io.File("C:/xampp/htdocs/img/"+params.image))
+        def imgs = params.image1.toString()
+        def list = []
+        list.addAll(imgs.split())
+        list.each {
+            def image = new Image(name:it.toString())
+            poi.addToImages(image)
+        }
         poi.save flush:true
 
         request.withFormat {

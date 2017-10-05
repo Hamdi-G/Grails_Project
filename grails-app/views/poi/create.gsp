@@ -29,7 +29,8 @@
             <div class="col-md-6">
                 <div class="card">
                     <form action="/poi/save" method="post" id="TypeValidation" class="form-horizontal"
-                          novalidate="novalidate">
+                          novalidate="novalidate" enctype="multipart/form-data">
+
                         <div class="card-header card-header-text" data-background-color="rose">
                             <h4 class="card-title">Création d'un lieu</h4>
                         </div>
@@ -165,7 +166,7 @@
                                         </--div-->
 
                                 <input class="file-path validate" type="text" name="image1" id="image1" style="visibility: hidden">
-
+                                <input type="file" name="file" id="file">
 
                             </fieldset>
 
