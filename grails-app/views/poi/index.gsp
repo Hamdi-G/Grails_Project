@@ -81,5 +81,12 @@
         </div>
     </div>
 </div>
+<g:javascript>
+    $(document).ready(function () {
+        $('#poisdatatables').DataTable({
+            language: options
+        });
+    });
+</g:javascript>
 </body>
 </html>

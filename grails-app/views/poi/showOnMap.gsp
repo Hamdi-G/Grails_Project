@@ -78,6 +78,105 @@
         </g:each>
     </div>
 </div>
-</body>
 
+<g:javascript>
+var pois
+var adresses = []
+
+function initMap() {
+
+    $.ajax({
+
+        url: "${g.createLink(controller: 'poi', action: 'listpoi')}",
+        dataType: "json",
+        success: function(data) {
+            pois = data
+
+        },
+        error: function(request, status, error) {
+
+        },
+        complete: function() {
+
+            var map1 = new google.maps.Map(document.getElementById('map1'), {
+                center: {
+                    lat: 43.729497,
+                    lng: 7.146764
+                },
+                zoom: 10,
+                scrollwheel: false
+            });
+            //ajout du marquer/adresse pour chaque poi
+
+            for (var i = 0; i < pois.length; i++) {
+
+
+                var latlngpoi = {lat: parseFloat(pois[i].lat), lng: parseFloat(pois[i].lng)}
+                    var infowindow = new google.maps.InfoWindow({
+                        maxWidth: 200
+                    });
+                    var content = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h4 id="firstHeading" class="firstHeading text-center"><b>'+pois[i].name+'</b></h4>'+
+                    '<div id="bodyContent"><p>'+
+                    //'<b>Adresse: </b><div id='+pois[i].id+'></div>'+
+                    '<b>Description: </b>'+pois[i].description+
+                    '<br>'+
+                    "<a href='/poi/show/"+pois[i].id+"'>"+
+                    "<small>en savoir plus...</small></a>"+
+                    '</p>'+
+                    '</div>'+
+                    '</div>';
+
+                    var marker = new google.maps.Marker({
+                        position: latlngpoi,
+                        map: map1,
+                        title: pois[i].name
+                    });
+                    google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
+                        return function() {
+                          infowindow.setContent(content);
+                          infowindow.open(map1, marker);
+                        };
+                    })(marker, content, infowindow));
+                geo(pois[i]);
+
+            }
+
+
+            var infoWindow = new google.maps.InfoWindow({
+                map: map1
+            });
+
+            // localisation d'utilisateur
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Vous êtes ici.');
+                    map1.setCenter(pos);
+                }, function() {
+                    handleLocationError(true, infoWindow, map1.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map1.getCenter());
+            }
+
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                alert('Error: Your browser doesn\'t support geolocation.');
+            }
+
+        }
+    });
+}
+</g:javascript>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=initMap"/>
+</body>
 </html>

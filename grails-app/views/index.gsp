@@ -86,5 +86,48 @@
         </div>
     </div>
 </div>
+<g:javascript>
+$( document ).ready(function() {
+
+    var groups
+    var ss = []
+    var total = 0
+    $.ajax({
+        url: "${g.createLink(controller: 'grails_project.Groupe', action: 'listgroup')}",
+        dataType: "json",
+        success: function(data) {
+            groups = data
+        },
+        error: function(request, status, error) {
+
+        },
+        complete: function() {
+
+            for (var i = 0; i < groups.length; i++) {
+                ss.push(parseInt(groups[i].pois.length.toString()))
+                total += parseInt(groups[i].pois.length.toString())
+
+            }
+            var percent = []
+            for (var i = 0; i < ss.length; i++) {
+                percent.push(Math.round(((ss[i] * 100) / total)).toString() + '% ' + groups[i].name.toString())
+
+            }
+
+            var dataPreferences = {
+                labels: percent,
+                series: ss
+            };
+
+            var optionsPreferences = {
+                height: '280px'
+            };
+
+            Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+        }
+
+    });
+});
+</g:javascript>
 </body>
 </html>

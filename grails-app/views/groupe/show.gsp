@@ -7,8 +7,8 @@
 </head>
 
 <body>
+<div class="hidden" id="groupid">${params.id}</div>
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -19,59 +19,72 @@
                 <div class="card-content">
                     <h4 class="card-title">${grails_project.Groupe.findById(params.id).name}</h4>
 
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <g:each var="i" in="${(1..<grails_project.Groupe.findById(params.id).images.size())}">
-                                <g:if test="${grails_project.Groupe.findById(params.id).images.size() != 0}">
-                                    <li data-target="#myCarousel" data-slide-to="${i}"></li>
-                                </g:if>
-                                <g:else>
-                                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                                </g:else>
-                            </g:each>
-                        </ol>
+                    <div id="mapgroup" class="map map-big" style="width:100%;height:500px;"></div>
 
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <g:each status="i" var="img" in="${grails_project.Groupe.findById(params.id).images}">
-                                <g:if test="${grails_project.Groupe.findById(params.id).images.size() != 0}">
-                                    <g:if test="${i == 0}">
-                                        <div class="item active">
-                                            <img class="img img-responsive center-block" style=" height: 400px"
-                                                         src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
-                                        </div>
-                                    </g:if>
-                                    <g:else>
-                                        <div class="item">
-                                            <img class="img img-responsive center-block" style=" height: 400px"
-                                                         src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
-                                        </div>
-                                    </g:else>
-                                </g:if>
-                                <g:else>
-                                    <div class="item active">
-                                        <asset:image class="img img-responsive center-block" style=" height: 400px"
-                                                     src="${grailsApplication.config.server.pathServer}/images/non_disponible.jpg"/>
-                                    </div>
-                                </g:else>
-                            </g:each>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <br>
+                            <h5>Description:</h5>
+                            <h6 class="card-description">${grails_project.Groupe.findById(params.id).description}</h6>
                         </div>
 
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        <div class="col-sm-6">
+                            <br>
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <g:each var="i"
+                                            in="${(1..<grails_project.Groupe.findById(params.id).images.size())}">
+                                        <g:if test="${grails_project.Groupe.findById(params.id).images.size() != 0}">
+                                            <li data-target="#myCarousel" data-slide-to="${i}"></li>
+                                        </g:if>
+                                        <g:else>
+                                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                                        </g:else>
+                                    </g:each>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+                                    <g:each status="i" var="img"
+                                            in="${grails_project.Groupe.findById(params.id).images}">
+                                        <g:if test="${grails_project.Groupe.findById(params.id).images.size() != 0}">
+                                            <g:if test="${i == 0}">
+                                                <div class="item active">
+                                                    <img class="img img-responsive center-block" style=" height: 300px"
+                                                         src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
+                                                </div>
+                                            </g:if>
+                                            <g:else>
+                                                <div class="item">
+                                                    <img class="img img-responsive center-block" style=" height: 300px"
+                                                         src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
+                                                </div>
+                                            </g:else>
+                                        </g:if>
+                                        <g:else>
+                                            <div class="item active">
+                                                <asset:image class="img img-responsive center-block"
+                                                             style=" height: 300px"
+                                                             src="${grailsApplication.config.server.pathServer}/images/non_disponible.jpg"/>
+                                            </div>
+                                        </g:else>
+                                    </g:each>
+                                </div>
+
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                    <h5>Description:</h5>
-                    <h6 class="card-description">${grails_project.Groupe.findById(params.id).description}</h6>
                 </div>
                 <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MODERATOR">
 
@@ -106,10 +119,12 @@
                             <div class="card-image" data-header-animation="true">
                                 <a href="#pablo">
                                     <g:if test="${p.images.size() != 0}">
-                                        <img class="img" src="${grailsApplication.config.server.pathServer}/images/${p.images[0].name}"/>
+                                        <img class="img"
+                                             src="${grailsApplication.config.server.pathServer}/images/${p.images[0].name}"/>
                                     </g:if>
                                     <g:else>
-                                        <img class="img" src="${grailsApplication.config.server.pathServer}/images/non_disponible.jpg"/>
+                                        <img class="img"
+                                             src="${grailsApplication.config.server.pathServer}/images/non_disponible.jpg"/>
                                     </g:else>
                                 </a>
                             </div>
@@ -141,7 +156,7 @@
                                     </sec:ifAnyGranted>
                                 </div>
                                 <h4 class="card-title">
-                                    <a href="/poi/show/${p.id}">${p.name}</a>                                </h4>
+                                    <a href="/poi/show/${p.id}">${p.name}</a></h4>
 
                                 <div class="card-description">
                                     ${p.description}
@@ -160,5 +175,69 @@
         </g:each>
     </div>
 </div>
+<g:javascript>
+var groupid = $('#groupid').text();
+var pois
+function initMap() {
+    $.ajax({
+        url: "${g.createLink(controller: 'grails_project.Poi', action: 'listpoi')}",
+        dataType: "json",
+        success: function(data) {
+            pois = data
+        },
+        error: function(request, status, error) {
+
+        },
+        complete: function() {
+            var map3 = new google.maps.Map(document.getElementById('mapgroup'), {
+                center: {
+                    lat: 43.729497,
+                    lng: 7.146764
+                },
+                zoom: 10,
+                scrollwheel: false
+            });
+
+            for (var i = 0; i < pois.length; i++) {
+                idgroup = parseInt((JSON.stringify(pois[i].groups)).substring(7,8))
+                if (idgroup == parseInt(groupid)){
+                    var latlngpoi = {lat: parseFloat(pois[i].lat), lng: parseFloat(pois[i].lng)}
+                    var infowindow = new google.maps.InfoWindow({
+                        maxWidth: 200
+                    });
+                    var content = '<div id="content">'+
+                        '<div id="siteNotice">'+
+                        '</div>'+
+                        '<h4 id="firstHeading" class="firstHeading text-center"><b>'+pois[i].name+'</b></h4>'+
+                        '<div id="bodyContent">'+
+                        '<p><b>Description: </b>'+pois[i].description+
+                        '<br>'+
+                        "<a href='/poi/show/"+pois[i].id+"'>"+
+                        "<small>en savoir plus...</small></a>"+
+                        '</p>'+
+                        '</div>'+
+                        '</div>';
+
+                    var marker = new google.maps.Marker({
+                        position: latlngpoi,
+                        map: map3,
+                        title: pois[i].name
+                    });
+                    google.maps.event.addListener(marker, 'click', (function(marker, content, infowindow) {
+                        return function() {
+                          infowindow.setContent(content);
+                          infowindow.open(map3, marker);
+                        };
+                    })(marker, content, infowindow));
+                    geo(pois[i]);
+                }
+            }
+        }
+    });
+}
+
+</g:javascript>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=initMap"/>
 </body>
 </html>

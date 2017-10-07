@@ -41,8 +41,9 @@
                                 <g:each status="i" var="img" in="${poi.images}">
                                     <g:if test="${poi.images.size() != 0}">
                                         <g:if test="${i == 0}">
-                                            <img class="img img-responsive center-block" style=" height: 400px"
-                                                 src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
+                                            <div class="item active">
+                                                <img class="img img-responsive center-block" style=" height: 400px"
+                                                     src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
                                             </div>
                                         </g:if>
                                         <g:else>
@@ -76,19 +77,20 @@
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <legend>Tags</legend>
-                                        <g:each var="g" in="${poi.groups}">
-                                            <a href="/groupe/bygroup?id=${g.id}"><div class="bootstrap-tagsinput">
-                                                <span class="tag label label-info">${g.name}</span>
-                                                <!-- You can change data-color="rose" with one of our colors primary | warning | info | danger | success -->
-                                            </div></a>
-                                        </g:each>
-                                    </div>
 
-                                </div>
+                                <legend>Tags</legend>
+                                <g:each var="g" in="${poi.groups}">
+                                    <a href="/groupe/show?id=${g.id}"><div class="bootstrap-tagsinput">
+                                        <span class="tag label label-info">${g.name}</span>
+                                        <!-- You can change data-color="rose" with one of our colors primary | warning | info | danger | success -->
+                                    </div></a>
+                                </g:each>
                                 <br>
+                                <br>
+                                <legend>Adresse:</legend>
+                                <h6 class="card-description" id="address"></h6>
+                                <br>
+
                                 <legend>Description:</legend>
                                 <h6 class="card-description">${poi.description}</h6>
                                 <br>
@@ -140,6 +142,30 @@
             </div>
         </div>
     </div>
-</div>
+    <g:javascript>
+        function initMap() {
+            var map2 = new google.maps.Map(document.getElementById('mappoi'), {
+                center: {
+                    lat: 43.729497,
+                    lng: 7.146764
+                },
+                zoom: 10
+            });
+
+            var latlngpoi = {
+                lat: parseFloat($("div#latt").text()),
+                lng: parseFloat($("div#lngg").text())
+            };
+
+            var marker1 = new google.maps.Marker({
+                position: latlngpoi,
+                map: map2
+            });
+            map2.setCenter(latlngpoi);
+            geo2(parseFloat($("div#latt").text()), parseFloat($("div#lngg").text()))
+        }
+    </g:javascript>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwPaWz9e-O1iqBASHZk_r_weUe3pCZbOM&callback=initMap"/>
 </body>
 </html>

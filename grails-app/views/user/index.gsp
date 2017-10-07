@@ -125,6 +125,12 @@
         </div>
     </div>
 </div>
-
+<g:javascript>
+$( document ).ready(function() {
+    $('#usersdatatables').DataTable({
+        language: options
+    });
+});
+</g:javascript>
 </body>
 </html>
