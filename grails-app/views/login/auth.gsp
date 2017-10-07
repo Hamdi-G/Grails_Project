@@ -56,7 +56,7 @@
 <div class="wrapper wrapper-full-page">
     <div class="full-page login-page" filter-color="black" data-image="">
         <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
-        <div class="content">
+        <div class="content" style="background-image: url(http://localhost:80/images/img1.jpg);">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
