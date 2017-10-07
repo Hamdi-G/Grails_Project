@@ -660,7 +660,7 @@ var groups
             //alert(JSON.stringify(total))
             var percent = []
             for (var i = 0; i < ss.length; i++) {
-                percent.push(((ss[i] * 100) / total).toString() + '% ' + groups[i].name.toString())
+                percent.push(Math.round(((ss[i] * 100) / total)).toString() + '% ' + groups[i].name.toString())
 
             }
             //alert(JSON.stringify(percent))

@@ -44,6 +44,14 @@ class PoiController {
             return
         }
 
+        def selectedGroupsID = params.groups
+        if (params.groups != null) {
+            (0..selectedGroupsID.size()-1).each{
+                int i ->
+                    def PoiGroup = new PoiGroup(groupe: Groupe.findById(selectedGroupsID[i]), poi: poi).save(flush: true)
+            }
+        }
+
         def file = request.getFile('file')
         file.transferTo(new File(grailsApplication.config.server.uploadImage + file.getOriginalFilename()))
 
@@ -86,6 +94,21 @@ class PoiController {
             return
         }
 
+        if (PoiGroup.findByPoi(poi) != null){
+            def list = PoiGroup.findAllByPoi(poi)
+            list.each {
+                it.delete()
+            }
+        }
+
+        def selectedGroupsID = params.groups
+        if (params.groups != null) {
+            (0..selectedGroupsID.size()-1).each{
+                int i ->
+                    def PoiGroup = new PoiGroup(groupe: Groupe.findById(selectedGroupsID[i]), poi: poi).save(flush: true)
+            }
+        }
+
         poi.save flush:true
 
         request.withFormat {
@@ -104,6 +127,13 @@ class PoiController {
             transactionStatus.setRollbackOnly()
             notFound()
             return
+        }
+
+        if (PoiGroup.findByPoi(poi) != null){
+            def list = PoiGroup.findAllByPoi(poi)
+            list.each {
+                it.delete()
+            }
         }
 
         poi.delete flush:true

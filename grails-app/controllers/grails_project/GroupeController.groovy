@@ -42,6 +42,16 @@ class GroupeController {
             respond groupe.errors, view:'create'
             return
         }
+
+        def selectedPoisID = params.pois
+        if (params.pois != null) {
+            (0..selectedPoisID.size()-1).each{
+                int i ->
+                    def PoiGroup = new PoiGroup(poi: Poi.findById(selectedPoisID[i]), groupe: groupe).save(flush: true)
+                    groupe.addToPois(Poi.findById(selectedPoisID[i]));
+            }
+        }
+
         def imgs = params.image1.toString()
         def list = []
         list.addAll(imgs.split())
@@ -78,6 +88,28 @@ class GroupeController {
             return
         }
 
+        if (PoiGroup.findByGroupe(groupe) != null){
+            def list = PoiGroup.findAllByGroupe(groupe)
+            list.each {
+                it.delete()
+            }
+        }
+
+        (groupe.pois.size()-1..0).each{
+            int i ->
+                groupe.removeFromPois(Poi.findById(groupe.pois[i].id))
+
+        }
+
+        def selectedPoisID = params.pois
+        if (params.pois != null) {
+            (0..selectedPoisID.size()-1).each{
+                int i ->
+                    def PoiGroup = new PoiGroup(poi: Poi.findById(selectedPoisID[i]), groupe: groupe).save(flush: true)
+                    groupe.addToPois(Poi.findById(selectedPoisID[i]));
+            }
+        }
+
         if(params.image1.toString()!="") {
             def imgs = params.image1.toString()
             def list = []
@@ -106,6 +138,20 @@ class GroupeController {
             transactionStatus.setRollbackOnly()
             notFound()
             return
+        }
+
+        if (PoiGroup.findByGroupe(groupe) != null){
+            def list = PoiGroup.findAllByGroupe(groupe)
+            list.each {
+                it.delete()
+            }
+        }
+
+        if (groupe.pois != null){
+            (groupe.pois.size()-1..0).each {
+                int i ->
+                    groupe.removeFromPois(groupe.pois[i])
+            }
         }
 
         groupe.delete flush:true
