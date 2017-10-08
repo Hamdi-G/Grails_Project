@@ -67,9 +67,11 @@
                                         <a href="/poi/edit/${poi.id}"
                                            class='btn btn-simple btn-success'><i
                                                 class='material-icons'>create</i></a>
-                                        <a href="/poi/delete/${poi.id}"
-                                           class='btn btn-simple btn-danger'><i
-                                                class='material-icons'>delete</i></a></td>
+                                        <g:form resource="${poi}" method="DELETE">
+                                            <input class="delete btn btn-danger btn-fill" type="submit"
+                                                   value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                                   onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+                                        </g:form></td>
                                 </tr>
                             </g:each>
                             </tbody>

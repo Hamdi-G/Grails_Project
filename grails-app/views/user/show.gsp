@@ -43,7 +43,7 @@
                                 <div class="fileinput text-center fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-new thumbnail img-circle">
                                         <g:if test="${user.image != null}">
-                                        <img src="${grailsApplication.config.server.pathServer}/images/${user.image.name}"/>
+                                            <img src="${grailsApplication.config.server.pathServer}/images/users/${user.image.name}" style="height: 100px;width: 100px"/>
                                         </g:if>
                                         <g:else>
                                             <asset:image src="placeholder.jpg"/>

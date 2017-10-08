@@ -83,8 +83,8 @@
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    //TODO replace with current user avatar
-                    <asset:image src="placeholder.jpg"/>
+                    <img src="${grailsApplication.config.server.pathServer}/images/users/${sec.loggedInUserInfo(field: 'username')+'.png'}"/>
+
                 </div>
 
                 <div class="info">

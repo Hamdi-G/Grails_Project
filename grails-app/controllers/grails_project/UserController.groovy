@@ -41,9 +41,12 @@ class UserController {
 
         if (!request.getFile('file').empty){
             def file = request.getFile('file')
-            def name = file.originalFilename
-            user.image = new Image(name: name)
-            file.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + name))
+            def type = file.contentType.toString()
+            type = type.substring(type.indexOf("/")+1,type.length())
+
+            def name = user.username.toString()
+            user.image = new Image(name: name+'.'+type)
+            file.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + '/users/'+ name+'.'+type))
         }
 
         user.save flush:true
