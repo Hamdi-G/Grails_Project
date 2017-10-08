@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <h3>${grails_project.Groupe.findById(params.id).name}s</h3>
+    <h3>lieux associés</h3>
     <br>
 
     <div class="row">
