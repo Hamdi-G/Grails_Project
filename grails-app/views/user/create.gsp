@@ -12,8 +12,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="/user/save" method="post" id="TypeValidation" class="form-horizontal"
-                          novalidate="novalidate">
+                    <g:uploadForm action="save" method="post" class="form-horizontal" enctype="multipart/form-data">
                         <div class="card-header card-header-text" data-background-color="rose">
                             <h4 class="card-title">Création d'un utilisateur</h4>
                         </div>
@@ -33,6 +32,30 @@
                             </g:hasErrors>
 
                             <fieldset class="form">
+
+                                <div class="row ">
+                                    <div class=" text-center">
+                                        <div class="fileinput text-center fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail img-circle">
+                                                <asset:image src="placeholder.jpg"/>
+                                            </div>
+
+                                            <div class="fileinput-preview fileinput-exists thumbnail img-circle"
+                                                 style=""></div>
+
+                                            <div>
+                                                <span class="btn btn-round btn-rose btn-file">
+                                                    <span class="fileinput-new">Ajouter votre photo</span>
+                                                    <span class="fileinput-exists">Changer</span>
+                                                    <input type="hidden" value="" name=""><input type="file" name="file">
+
+                                                    <div class="ripple-container"></div></span>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="row">
                                     <label class="col-sm-2 label-on-left">Idantifiant</label>
@@ -78,31 +101,26 @@
 
                                 <div class="checkbox fieldcontain col-md-offset-2">
                                     <label>
-                                        <input type="checkbox" name="passwordExpired" id="passwordExpired"
-                                               required="true"
-                                               aria-required="true">Password Expired
+                                        <input type="checkbox" name="passwordExpired"
+                                               id="passwordExpired">Password Expired
                                     </label>
                                 </div>
 
                                 <div class="checkbox fieldcontain col-md-offset-2">
                                     <label>
-                                        <input type="checkbox" name="accountLocked" id="accountLocked" required="true"
-                                               aria-required="true">Account Locked
+                                        <input type="checkbox" name="accountLocked" id="accountLocked">Account Locked
                                     </label>
                                 </div>
 
                                 <div class="checkbox fieldcontain col-md-offset-2">
                                     <label>
-                                        <input type="checkbox" name="accountExpired" id="accountExpired" required="true"
-                                               aria-required="true">Account Expired
+                                        <input type="checkbox" name="accountExpired" id="accountExpired">Account Expired
                                     </label>
                                 </div>
 
                                 <div class="checkbox fieldcontain col-md-offset-2">
                                     <label>
-                                        <input type="checkbox" name="enabled" checked="checked" id="enabled"
-                                               required="true"
-                                               aria-required="true">Enabled
+                                        <input type="checkbox" name="enabled" checked="checked" id="enabled">Enabled
                                     </label>
                                 </div>
 
@@ -115,7 +133,7 @@
                                 </fieldset>
                             </div>
                         </div>
-                    </form>
+                    </g:uploadForm>
                 </div>
             </div>
         </div>

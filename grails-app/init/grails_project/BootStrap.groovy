@@ -10,9 +10,9 @@ class BootStrap {
         def userRole = new Grails_Project.Role(authority : 'ROLE_USER').save(Flush:true,failOnError:true);
 
 
-        def adminUser = new Grails_Project.User(username: 'admin',password: 'password').save()
-        def moderatorUser = new Grails_Project.User(username: 'moderator',password: 'password').save()
-        def userUser = new Grails_Project.User(username: 'user',password: 'password').save()
+        def adminUser = new Grails_Project.User(username: 'admin',password: 'password', image: new Image(name: 'im.png')).save()
+        def moderatorUser = new Grails_Project.User(username: 'moderator',password: 'password', image: new Image(name: 'imy.png')).save()
+        def userUser = new Grails_Project.User(username: 'user',password: 'password', image: new Image(name: 'ima.png')).save()
 
         UserRole.create(adminUser,adminRole,true);
         UserRole.create(userUser,userRole,true);

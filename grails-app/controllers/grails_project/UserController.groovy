@@ -39,6 +39,13 @@ class UserController {
             return
         }
 
+        if (!request.getFile('file').empty){
+            def file = request.getFile('file')
+            def name = file.originalFilename
+            user.image = new Image(name: name)
+            file.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + name))
+        }
+
         user.save flush:true
         UserRole.create(user,Role.findById(params.roleId),true);
 

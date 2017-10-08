@@ -1,84 +1,109 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
-    </head>
-    <body>
+<head>
+    <meta name="layout" content="main"/>
+    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}"/>
+    <title><g:message code="default.show.label" args="[entityName]"/></title>
+</head>
 
-    <button class="btn btn-primary btn-round" style="float: right">
-        <a href="${createLink(uri: '/')}" style="color: white">
-            <i class="material-icons">home</i> Home
-        </a>
-    </button>
-    <button class="btn btn-primary btn-round" style="float: right">
-        <g:link class="create" action="create"><g:message args="[entityName]"/><i class="material-icons"
-                                                                                  style="color: white">add</i></g:link>
+<body>
+
+<button class="btn btn-primary btn-round" style="float: right">
+    <a href="${createLink(uri: '/')}" style="color: white">
+        <i class="material-icons">home</i> Home
     </a>
-    </button>
+</button>
+<button class="btn btn-primary btn-round" style="float: right">
+    <g:link class="create" action="create"><g:message args="[entityName]"/><i class="material-icons"
+                                                                              style="color: white">add</i></g:link>
+</a>
+</button>
 
-    <button class="btn btn-primary btn-round" style="float: right">
-        <g:link class="list" action="index"><g:message args="[entityName]"/><i class="material-icons"
-                                                                               style="color: white">list</i></g:link>
-    </a>
-    </button>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-text" data-background-color="rose">
-                        <h4 class="card-title">Votre Profil</h4>
-                    </div>
+<button class="btn btn-primary btn-round" style="float: right">
+    <g:link class="list" action="index"><g:message args="[entityName]"/><i class="material-icons"
+                                                                           style="color: white">list</i></g:link>
+</a>
+</button>
 
-                    <div class="card-content">
-                        <input type="hidden" name="version" value="0" id="version">
-                        <fieldset class="form">
-                            <br><br>
-                            <div class="row">
-                                <label class="col-sm-2 label-on-left">Idantifiant</label>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-text" data-background-color="rose">
+                    <h4 class="card-title">Votre Profil</h4>
+                </div>
 
-                                <label class="col-sm-2 label-on-left">${user.username}</label>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <label class="col-sm-2 label-on-left">Mot de passe</label>
+                <div class="card-content">
+                    <input type="hidden" name="version" value="0" id="version">
+                    <fieldset class="form">
+                        <br>
 
-                                <label class="col-sm-2 label-on-left">${user.password}</label>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <label class="col-sm-2 label-on-left">Rôle</label>
+                        <div class="row ">
+                            <div class=" text-center">
+                                <div class="fileinput text-center fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail img-circle">
+                                        <g:if test="${user.image != null}">
+                                        <img src="${grailsApplication.config.server.pathServer}/images/${user.image.name}"/>
+                                        </g:if>
+                                        <g:else>
+                                            <asset:image src="placeholder.jpg"/>
+                                        </g:else>
+                                    </div>
 
-                                <div class="col-sm-7">
-                                    <span class="tag label label-rose">${Grails_Project.UserRole.findByUser(user).role.authority}</span>
+                                    <div class="fileinput-preview fileinput-exists thumbnail img-circle"
+                                         style=""></div>
+
                                 </div>
                             </div>
+                        </div>
+                        <br><br>
 
-                        </fieldset>
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Idantifiant</label>
 
-                        <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MODERATOR">
+                            <label class="col-sm-2 label-on-left">${user.username}</label>
+                        </div>
+                        <br>
 
-                            <div class="card-footer text-center">
-                                <g:form resource="${user}" method="DELETE">
-                                    <fieldset class="buttons">
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Mot de passe</label>
 
-                                        <g:link class="edit" action="edit"
-                                                resource="${user}"><div
-                                                class="btn btn-success btn-fill">Modifier</div></g:link>
-                                        <input class="delete btn btn-danger btn-fill" type="submit"
-                                               value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                               onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
-                                    </fieldset>
-                                </g:form>
+                            <label class="col-sm-2 label-on-left">${user.password}</label>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <label class="col-sm-2 label-on-left">Rôle</label>
+
+                            <div class="col-sm-7">
+                                <span class="tag label label-rose">${Grails_Project.UserRole.findByUser(user).role.authority}</span>
                             </div>
-                        </sec:ifAnyGranted>
-                    </div>
+                        </div>
 
+                    </fieldset>
+
+                    <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MODERATOR">
+
+                        <div class="card-footer text-center">
+                            <g:form resource="${user}" method="DELETE">
+                                <fieldset class="buttons">
+
+                                    <g:link class="edit" action="edit"
+                                            resource="${user}"><div
+                                            class="btn btn-success btn-fill">Modifier</div></g:link>
+                                    <input class="delete btn btn-danger btn-fill" type="submit"
+                                           value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                           onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+                                </fieldset>
+                            </g:form>
+                        </div>
+                    </sec:ifAnyGranted>
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -108,5 +133,5 @@
                 </fieldset>
             </g:form>
         </div>--}%
-    </body>
+</body>
 </html>

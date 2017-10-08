@@ -83,7 +83,8 @@
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="../assets/img/faces/avatar.jpg"/>
+                    //TODO replace with current user avatar
+                    <asset:image src="placeholder.jpg"/>
                 </div>
 
                 <div class="info">
