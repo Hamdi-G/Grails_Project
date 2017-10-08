@@ -83,7 +83,7 @@
         <div class="sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="${grailsApplication.config.server.pathServer}/images/users/${sec.loggedInUserInfo(field: 'username')+'.png'}"/>
+                    <img src="${grailsApplication.config.server.pathServer}/images/users/${sec.loggedInUserInfo(field: 'username')+'.jpg'}"/>
 
                 </div>
 

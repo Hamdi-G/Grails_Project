@@ -87,7 +87,7 @@ class UserController {
                 user.image.delete()
             }
             user.image = new Image(name: name)
-            file.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + name))
+            file.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + '/users/'+ name+'.'+type))
         }
 
         def ur = new UserRole(user: user, role: Role.findById(params.roleId))
