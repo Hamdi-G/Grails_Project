@@ -30,7 +30,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="card">
-                <g:uploadForm resource="${this.poi}" method="PUT" enctype="multipart/form-data">
+                <g:uploadForm url="[resource: poi, action: 'update']" enctype="multipart/form-data">
 
                     <div class="card-header card-header-text" data-background-color="rose">
                         <h4 class="card-title">Modification d'un lieu</h4>

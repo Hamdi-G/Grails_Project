@@ -1,6 +1,6 @@
 package grails_project
 
-class Groupe {
+class Groupe implements Serializable{
 
     String name;
     String description;

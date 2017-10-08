@@ -1,6 +1,6 @@
 package grails_project
 
-class Poi {
+class Poi implements Serializable{
 
     String name;
     String description;

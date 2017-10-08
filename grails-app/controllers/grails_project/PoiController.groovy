@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class PoiController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: ["PUT","POST"], delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -88,6 +88,12 @@ class PoiController {
             transactionStatus.setRollbackOnly()
             respond poi.errors, view:'edit'
             return
+        }
+
+        request.getMultiFileMap().files.each {
+            def name = it.originalFilename
+            poi.addToImages(new Image(name: name))
+            it.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + name))
         }
 
         if (PoiGroup.findByPoi(poi) != null){

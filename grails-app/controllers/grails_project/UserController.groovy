@@ -86,7 +86,7 @@ class UserController {
             user.image = new Image(name: name)
             file.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + name))
         }
-        
+
         def ur = new UserRole(user: user, role: Role.findById(params.roleId))
         UserRole.merge(ur)
         user.save flush:true

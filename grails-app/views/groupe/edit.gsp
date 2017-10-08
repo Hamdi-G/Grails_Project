@@ -12,10 +12,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="/groupe/update/${this.groupe.id}" method="post" enctype="multipart/form-data"><input
-                            type="hidden" name="_method" value="PUT" id="_method"/>
-                        <input type="hidden" name="version" value="1" id="version"/>
-
+                    <g:uploadForm url="[resource: groupe, action: 'update']" method="POST"
+                                  enctype="multipart/form-data">
                         <div class="card-header card-header-text" data-background-color="rose">
                             <h4 class="card-title">Modification d'une catégorie</h4>
                         </div>
@@ -93,14 +91,19 @@
                             </fieldset>
 
                             <div class="row">
-                                <br>
-                                <g:each var="imag" in="${groupe.images}">
-                                    <ul style="float: left">
-                                        <li><img src="${grailsApplication.config.server.pathServer}/images/${imag.name}" style="width: 150px; height: 150px"/></li>
-                                    </ul>
-                                </g:each>
+                                <div class="col-md">
+                                    <br><br>
+                                    <g:each var="img" in="${groupe.images}">
+                                        <a href="${grailsApplication.config.server.pathServer}/images/${img.name}">
+                                            <img class="img-thumbnail" style="width: 200px; height: 150px"
+                                                 src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
+                                        </a>
+                                    </g:each>
+                                </div>
+                            </div>
+                            <br>
 
-                                <br>
+                            <div class="row">
 
                                 <div class="container" style=" width: 100%;float: left">
                                     <input type="file" name="files" accept="image/*" multiple>
@@ -114,7 +117,7 @@
                                 </fieldset>
                             </div>
                         </div>
-                    </form>
+                    </g:uploadForm>
                 </div>
             </div>
         </div>
