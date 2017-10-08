@@ -63,7 +63,7 @@
 
                 <div class="card-footer">
                     <div class="stats">
-                        <a href="#">Voir tous</a>
+                        <a href="/user/">Voir tous</a>
                     </div>
                 </div>
             </div>

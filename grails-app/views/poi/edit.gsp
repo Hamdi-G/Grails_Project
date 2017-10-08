@@ -92,7 +92,7 @@
                                             <div class="form-group label-floating is-empty fieldcontain required">
                                                 <label class="control-label"></label>
                                                 <input class="form-control" type="text" name="lat" id="lat"
-                                                       value="${poi.lat}"
+                                                       value="${poi.lat.toString().replace('.',',')}"
                                                        required="true"
                                                        aria-required="true">
                                                 <span class="material-input"></span></div>
@@ -106,7 +106,7 @@
                                             <div class="form-group label-floating is-empty fieldcontain required">
                                                 <label class="control-label"></label>
                                                 <input class="form-control" type="text" name="lng" id="lng"
-                                                       value="${poi.lng}"
+                                                       value="${poi.lng.toString().replace('.',',')}"
                                                        required="true"
                                                        aria-required="true">
                                                 <span class="material-input"></span></div>
@@ -148,8 +148,13 @@
                         </div>
                         <div class="row">
                             <br>
+                            <g:each var="imag" in="${poi.images}">
+                                <ul style="float: left">
+                                    <li><img src="${grailsApplication.config.server.pathServer}/images/${imag.name}" style="width: 150px; height: 150px"/></li>
+                                </ul>
+                            </g:each>
 
-                            <div class="container" style=" width: 100%">
+                            <div class="container" style=" width: 100%;float: left">
                                 <input type="file" name="files" accept="image/*" multiple>
                             </div>
 

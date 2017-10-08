@@ -94,8 +94,15 @@
 
                             <div class="row">
                                 <br>
+                                <g:each var="imag" in="${groupe.images}">
+                                    <ul style="float: left">
+                                        <li><img src="${grailsApplication.config.server.pathServer}/images/${imag.name}" style="width: 150px; height: 150px"/></li>
+                                    </ul>
+                                </g:each>
 
-                                <div class="container" style=" width: 100%">
+                                <br>
+
+                                <div class="container" style=" width: 100%;float: left">
                                     <input type="file" name="files" accept="image/*" multiple>
                                 </div>
 

@@ -103,7 +103,7 @@ dataSource:
     password: ''
 server:
     port: 9999
-    uploadImage: '/Applications/XAMPP/htdocs/images/'
+    uploadImage: 'C:/xampp/htdocs/images/'
     pathServer: 'http://localhost:80'
 environments:
     development:
