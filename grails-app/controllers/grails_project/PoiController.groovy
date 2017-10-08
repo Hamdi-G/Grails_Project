@@ -52,16 +52,12 @@ class PoiController {
             }
         }
 
-        def file = request.getFile('file')
-        file.transferTo(new File(grailsApplication.config.server.uploadImage + file.getOriginalFilename()))
-
-        def imgs = params.image1.toString()
-        def list = []
-        list.addAll(imgs.split())
-        list.each {
-            def image = new Image(name:it.toString())
-            poi.addToImages(image)
+        request.getMultiFileMap().files.each {
+            def name = it.originalFilename
+            poi.addToImages(new Image(name: name))
+            it.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + name))
         }
+
         poi.save flush:true
 
         request.withFormat {

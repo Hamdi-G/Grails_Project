@@ -48,8 +48,12 @@
 
     <asset:stylesheet src="application.css"/>
 
+    <asset:stylesheet src="imageuploadify.min.css"/>
+    <asset:stylesheet src="font-awesome.min.css"/>
+
     <asset:javascript src="jquery-3.2.1.min.js"/>
     <asset:javascript src="application.js"/>
+    <asset:javascript src="imageuploadify.min.js"/>
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">

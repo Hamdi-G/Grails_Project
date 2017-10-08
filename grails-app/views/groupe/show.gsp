@@ -229,6 +229,7 @@ function initMap() {
                     geo(pois[i]);
                 }
             }
+            getLocation(map3)
         }
     });
 }

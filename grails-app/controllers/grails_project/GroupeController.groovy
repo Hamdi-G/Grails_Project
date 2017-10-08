@@ -52,13 +52,12 @@ class GroupeController {
             }
         }
 
-        def imgs = params.image1.toString()
-        def list = []
-        list.addAll(imgs.split())
-        list.each {
-            def image = new Image(name:it.toString())
-            groupe.addToImages(image)
+        request.getMultiFileMap().files.each {
+            def name = it.originalFilename
+            groupe.addToImages(new Image(name: name))
+            it.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + name))
         }
+
         groupe.save flush:true
 
         request.withFormat {
@@ -107,16 +106,6 @@ class GroupeController {
                 int i ->
                     def PoiGroup = new PoiGroup(poi: Poi.findById(selectedPoisID[i]), groupe: groupe).save(flush: true)
                     groupe.addToPois(Poi.findById(selectedPoisID[i]));
-            }
-        }
-
-        if(params.image1.toString()!="") {
-            def imgs = params.image1.toString()
-            def list = []
-            list.addAll(imgs.split())
-            list.each {
-                def image = new Image(name: it.toString())
-                groupe.addToImages(image)
             }
         }
 

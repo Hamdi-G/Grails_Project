@@ -11,6 +11,10 @@ grails:
             # Whether to translate GORM events into Reactor events
             # Disabled by default for performance reasons
             events: false
+    controllers:
+            upload:
+                maxFileSize: 20971520
+                maxRequestSize: 41943040
 info:
     app:
         name: '@info.app.name@'
@@ -99,7 +103,7 @@ dataSource:
     password: ''
 server:
     port: 9999
-    uploadImage: 'C:/xampp/htdocs/images/'
+    uploadImage: '/Applications/XAMPP/htdocs/images/'
     pathServer: 'http://localhost:80'
 environments:
     development:

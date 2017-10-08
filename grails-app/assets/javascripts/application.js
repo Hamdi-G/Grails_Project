@@ -124,10 +124,36 @@ function someOtherFunction2(address) {
 
 }
 
+// localisation d'utilisateur
+function getLocation(map_) {
+    var infoWindow = new google.maps.InfoWindow({
+        map: map_
+    });
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Vous êtes ici.');
+            map_.setCenter(pos);
+        }, function() {
+            handleLocationError(true, infoWindow, map_.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map_.getCenter());
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        alert('Error: Your browser doesn\'t support geolocation.');
+    }
+}
 
 
-
-
+/*
 
 
 
@@ -260,5 +286,5 @@ $(document).ready(function() {
         e.stopPropagation();
         e.preventDefault();
     });
-});
+});*/
 

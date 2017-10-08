@@ -149,7 +149,7 @@
                     lat: 43.729497,
                     lng: 7.146764
                 },
-                zoom: 10
+                zoom: 15
             });
 
             var latlngpoi = {

@@ -30,9 +30,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="card">
-                <form action="/poi/update/${this.poi.id}" method="post"><input type="hidden" name="_method" value="PUT"
-                                                                               id="_method"/>
-                    <input type="hidden" name="version" value="1" id="version"/>
+                <g:uploadForm resource="${this.poi}" method="PUT" enctype="multipart/form-data">
 
                     <div class="card-header card-header-text" data-background-color="rose">
                         <h4 class="card-title">Modification d'un lieu</h4>
@@ -149,13 +147,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div id="dragandrophandler">Drag & Drop Files Here</div>
-                            <br><br>
+                            <br>
 
-                            <div id="status1"></div>
-                            <input class="file-path validate" type="text" name="image1" id="image1"
-                                   style="visibility: hidden">
-                            <input type="file" name="file" id="file">
+                            <div class="container" style=" width: 100%">
+                                <input type="file" name="files" accept="image/*" multiple>
+                            </div>
+
                         </div>
 
                         <div class="card-footer text-center">
@@ -164,20 +161,25 @@
                             </fieldset>
                         </div>
                     </div>
-                </form>
+                </g:uploadForm>
             </div>
 
         </div>
     </div>
 </div>
 <g:javascript>
+$(document).ready(function() {
+    $('input[type="file"]').imageuploadify();
+    document.getElementById("lat").value = document.getElementById("lat").value.toString().replace('.',',');
+    document.getElementById("lng").value = document.getElementById("lng").value.toString().replace('.',',');
+})
 function myMap() {
 
     var latValue = "${poi.lat}";
     var lngValue = "${poi.lng}";
     var mapOptions = {
         center: new google.maps.LatLng( latValue,lngValue),
-        zoom: 6,
+        zoom: 15,
         mapTypeId: google.maps.MapTypeId.PLAN
     }
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);

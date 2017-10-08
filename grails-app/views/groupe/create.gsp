@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form action="/groupe/save" method="post" id="TypeValidation" class="form-horizontal"
+                    <g:uploadForm action="save" method="post" class="form-horizontal"
                           novalidate="novalidate" enctype="multipart/form-data">
                         <div class="card-header card-header-text" data-background-color="rose">
                             <h4 class="card-title">Création d'une catégorie</h4>
@@ -91,16 +91,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="margin-left: 170px">
-                                    <div id="dragandrophandler">Drag & Drop Files Here</div>
-                                    <br><br>
-                                    <div id="status1"></div>
-                                </div>
-
-                                <input type="text" name="image1" id="image1" style="visibility: hidden">
 
                             </fieldset>
 
+                            <div class="row">
+                                <br>
+
+                                <div class="container" style=" width: 100%">
+                                    <input type="file" name="files" accept="image/*" multiple>
+                                </div>
+
+                            </div>
 
                             <div class="card-footer text-center">
                                 <fieldset class="buttons">
@@ -108,12 +109,16 @@
                                 </fieldset>
                             </div>
                         </div>
-                    </form>
+                    </g:uploadForm>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<g:javascript>
+    $(document).ready(function () {
+        $('input[type="file"]').imageuploadify();
+    })
+</g:javascript>
 </body>
 </html>

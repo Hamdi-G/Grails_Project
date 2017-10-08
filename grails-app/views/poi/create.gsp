@@ -28,8 +28,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="card">
-                <form action="/poi/save" method="post" id="TypeValidation" class="form-horizontal"
-                      novalidate="novalidate" enctype="multipart/form-data">
+                <g:uploadForm action="save" method="post" class="form-horizontal"
+                              novalidate="novalidate" enctype="multipart/form-data">
 
                     <div class="card-header card-header-text" data-background-color="rose">
                         <h4 class="card-title">Création d'un lieu</h4>
@@ -138,14 +138,12 @@
                         </div>
 
                         <div class="row">
-                            <div id="dragandrophandler">Drag & Drop Files Here</div>
-                            <br><br>
+                            <br>
 
-                            <div id="status1" style="width: 460px"></div>
+                            <div class="container" style=" width: 100%">
+                                <input type="file" name="files" accept="image/*" multiple>
+                            </div>
 
-                            <input class="file-path validate" type="text" name="image1" id="image1"
-                                   style="visibility: hidden">
-                            <input type="file" name="file" id="file">
                         </div>
 
                         <div class="card-footer text-center">
@@ -155,33 +153,32 @@
                         </div>
                     </div>
 
-                </form>
+                </g:uploadForm>
 
             </div>
         </div>
     </div>
 </div>
 <g:javascript>
+$(document).ready(function() {
+    $('input[type="file"]').imageuploadify();
+})
+
 function myMap() {
 
-    var latValue = "${poi.lat}";
-    var lngValue = "${poi.lng}";
     var mapOptions = {
-        center: new google.maps.LatLng( latValue,lngValue),
-        zoom: 6,
+        center: new google.maps.LatLng(46.00,2.76),
+        zoom: 5,
         mapTypeId: google.maps.MapTypeId.PLAN
     }
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     var marker = new google.maps.Marker({
-        position:mapOptions.center,
         map:map
     });
     google.maps.event.addListener(map, 'click', function(e) {
         marker.setPosition(e.latLng);
         document.getElementById("lat").value = marker.getPosition().lat().toString().replace('.',',');
         document.getElementById("lng").value =marker.getPosition().lng().toString().replace('.',',');
-        //document.getElementById("alt").value = marker.altitude.valueOf();
-// .setAttribute(lat,marker.getPosition().lat())
     });
 }
 </g:javascript>

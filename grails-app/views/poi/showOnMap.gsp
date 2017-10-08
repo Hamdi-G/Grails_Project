@@ -32,7 +32,8 @@
                 <div class="card card-product" data-count="7">
                     <div class="card-image" data-header-animation="true">
                         <a href="#pablo">
-                            <asset:image class="img" src="${poi.images[0]}"/>
+                            <img class="img"
+                                 src="${grailsApplication.config.server.pathServer}/images/${poi.images[0].name}"/>
                         </a>
                     </div>
 
@@ -143,34 +144,9 @@ function initMap() {
                 geo(pois[i]);
 
             }
+            getLocation(map1)
 
 
-            var infoWindow = new google.maps.InfoWindow({
-                map: map1
-            });
-
-            // localisation d'utilisateur
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-
-                    infoWindow.setPosition(pos);
-                    infoWindow.setContent('Vous êtes ici.');
-                    map1.setCenter(pos);
-                }, function() {
-                    handleLocationError(true, infoWindow, map1.getCenter());
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map1.getCenter());
-            }
-
-            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-                alert('Error: Your browser doesn\'t support geolocation.');
-            }
 
         }
     });
