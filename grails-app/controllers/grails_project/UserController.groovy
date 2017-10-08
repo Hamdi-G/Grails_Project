@@ -10,7 +10,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: ["PUT","POST"], delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -77,9 +77,21 @@ class UserController {
             return
         }
 
+        if (!request.getFile('file').empty){
+            def file = request.getFile('file')
+            def name = file.originalFilename
+            if (user.image != null) {
+                user.image.delete()
+            }
+            user.image = new Image(name: name)
+            file.transferTo(new java.io.File(grailsApplication.config.server.uploadImage + name))
+        }
+        
+        def ur = new UserRole(user: user, role: Role.findById(params.roleId))
+        UserRole.merge(ur)
         user.save flush:true
-        UserRole.remove(user, UserRole.findByUser(user).getRole());
-        UserRole.create(user, Role.findById(params.roleId),true)
+
+
 
         request.withFormat {
             form multipartForm {

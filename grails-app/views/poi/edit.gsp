@@ -147,12 +147,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <br>
-                            <g:each var="imag" in="${poi.images}">
-                                <ul style="float: left">
-                                    <li><img src="${grailsApplication.config.server.pathServer}/images/${imag.name}" style="width: 150px; height: 150px"/></li>
-                                </ul>
-                            </g:each>
+                            <div class="col-md">
+                                    <br><br>
+                                    <g:each var="img" in="${poi.images}">
+                                        <a href="${grailsApplication.config.server.pathServer}/images/${img.name}">
+                                            <img class="img-thumbnail" style="width: 200px; height: 150px"
+                                                 src="${grailsApplication.config.server.pathServer}/images/${img.name}"/>
+                                        </a>
+                                    </g:each>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
 
                             <div class="container" style=" width: 100%;float: left">
                                 <input type="file" name="files" accept="image/*" multiple>
