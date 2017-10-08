@@ -1,8 +1,9 @@
 # Grails_Project
 
 #PRESENTATION
-Ce TP nous a permet de bien découvrir le Framework Grails
-ce dossier contient les images d'initialisation:https://drive.google.com/open?id=0B4mcIOcRR6phbjAzVmR4RnVZTm8  et on doit le mettre sous htdocs.
+Ce TP nous a permet de bien découvrir le Framework Grails.
+
+Ce dossier contient les images d'initialisation:https://drive.google.com/open?id=0B4mcIOcRR6phbjAzVmR4RnVZTm8  et on doit le mettre sous htdocs.
 
 #OUTILS et Technologies DE DEVELOPPEMENT***
 Java 8
